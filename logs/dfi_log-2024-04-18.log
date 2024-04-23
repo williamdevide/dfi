@@ -1,0 +1,148 @@
+2024-04-18 08:21:36,378 - DFI => Execução iniciada
+2024-04-18 08:21:36,384 -     => Main - Execução iniciada
+2024-04-18 08:21:36,385 -     => commodities - Execução iniciada
+2024-04-18 08:24:54,103 -     => commodities - Execução concluída
+2024-04-18 08:24:54,107 -     => avacorp - Execução iniciada
+2024-04-18 08:26:21,274 -     => avacorp - Execução concluída
+2024-04-18 08:26:21,283 -     => Main - Execução concluída
+2024-04-18 09:34:48,976 - DFI => Execução iniciada
+2024-04-18 09:34:48,993 -     => Main - Execução iniciada
+2024-04-18 09:34:48,993 -     => commodities - Execução iniciada
+2024-04-18 09:41:29,536 - DFI => Execução iniciada
+2024-04-18 09:41:29,543 -     => Main - Execução iniciada
+2024-04-18 09:41:29,543 -     => commodities - Execução iniciada
+2024-04-18 10:24:42,547 - DFI => Execução iniciada
+2024-04-18 10:24:42,553 -     => Main - Execução iniciada
+2024-04-18 10:24:42,553 -     => commodities - Execução iniciada
+2024-04-18 10:24:44,894 -       => Error: O arquivo serie_acucar.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                           
+2024-04-18 10:24:44,894 -       => Error: O arquivo serie_leite.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                            
+2024-04-18 10:24:44,895 -       => Error: O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                         
+2024-04-18 10:24:44,895 -       => Error: O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                            
+2024-04-18 10:24:44,895 -       => Error: O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                              
+2024-04-18 10:24:44,895 -       => Error: O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                             
+2024-04-18 10:24:44,895 -       => Error: O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.                                                                                            
+2024-04-18 10:25:51,683 - DFI => Execução iniciada
+2024-04-18 10:25:51,690 -     => Main - Execução iniciada
+2024-04-18 10:25:51,690 -     => commodities - Execução iniciada
+2024-04-18 10:25:52,484 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_acucar.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:25:52,485 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_leite.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:25:52,486 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:25:52,487 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:25:52,488 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:25:52,489 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:25:52,490 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:29:15,386 -     => commodities - Execução concluída
+2024-04-18 10:29:15,390 -     => avacorp - Execução iniciada
+2024-04-18 10:31:12,709 -     => avacorp - Execução concluída
+2024-04-18 10:31:12,719 -     => Main - Execução concluída
+2024-04-18 10:33:06,853 - DFI => Execução iniciada
+2024-04-18 10:33:06,859 -     => Main - Execução iniciada
+2024-04-18 10:33:06,859 -     => commodities - Execução iniciada
+2024-04-18 10:33:24,782 - DFI => Execução iniciada
+2024-04-18 10:33:24,789 -     => Main - Execução iniciada
+2024-04-18 10:33:24,789 -     => commodities - Execução iniciada
+2024-04-18 10:33:25,615 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_acucar.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:33:25,616 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_leite.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:33:25,617 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:33:25,618 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:33:25,619 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:33:25,620 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:33:25,621 -       => Error: 
+                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:57,285 - DFI => Execução iniciada
+2024-04-18 10:34:57,292 -     => Main - Execução iniciada
+2024-04-18 10:34:57,292 -     => commodities - Execução iniciada
+2024-04-18 10:34:58,426 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_acucar.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:58,427 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_leite.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:58,428 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:58,429 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:58,430 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:58,431 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:34:58,432 -       => Error:                     (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]: 
+                    (>) O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.
+2024-04-18 10:38:17,763 -     => commodities - Execução concluída
+2024-04-18 10:38:17,767 -     => avacorp - Execução iniciada
+2024-04-18 10:39:58,914 -     => avacorp - Execução concluída
+2024-04-18 10:39:58,924 -     => Main - Execução concluída
+2024-04-18 10:41:58,992 -     => Main - Execução iniciada
+2024-04-18 10:41:58,993 -     => commodities - Execução iniciada
+2024-04-18 10:46:05,148 -     => commodities - Execução concluída
+2024-04-18 10:46:05,216 -     => avacorp - Execução iniciada
+2024-04-18 10:47:29,686 -     => avacorp - Execução concluída
+2024-04-18 10:47:29,699 -     => Main - Execução concluída
+2024-04-18 10:49:29,778 -     => Main - Execução iniciada
+2024-04-18 10:49:29,778 -     => commodities - Execução iniciada
+2024-04-18 10:50:34,076 - DFI => Execução iniciada
+2024-04-18 10:50:34,083 -     => Main - Execução iniciada
+2024-04-18 10:50:34,083 -     => commodities - Execução iniciada
+2024-04-18 10:51:41,543 - DFI => Execução iniciada
+2024-04-18 10:51:41,550 -     => Main - Execução iniciada
+2024-04-18 10:51:41,550 -     => commodities - Execução iniciada
+2024-04-18 10:51:42,360 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_acucar.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:51:42,362 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_leite.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:51:42,363 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:51:42,363 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:51:42,365 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:51:42,365 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:51:42,366 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]:: (>) O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:52:42,230 - DFI => Execução iniciada
+2024-04-18 10:52:42,236 -     => Main - Execução iniciada
+2024-04-18 10:52:42,237 -     => commodities - Execução iniciada
+2024-04-18 10:52:43,123 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:52:43,124 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:52:43,125 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:52:43,126 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:52:43,127 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:53:38,538 - DFI => Execução iniciada
+2024-04-18 10:53:38,544 -     => Main - Execução iniciada
+2024-04-18 10:53:38,544 -     => commodities - Execução iniciada
+2024-04-18 10:53:39,497 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:53:39,498 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:53:39,499 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:53:39,500 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:53:39,501 -       => Error:                    (X) D:\Development\Python\dfi\src\script\tools\tools.py[verifyFile]::                    (>) O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:57:08,834 -     => commodities - Execução concluída
+2024-04-18 10:57:08,838 -     => avacorp - Execução iniciada
+2024-04-18 10:58:59,403 - DFI => Execução iniciada
+2024-04-18 10:58:59,410 -     => Main - Execução iniciada
+2024-04-18 10:58:59,410 -     => commodities - Execução iniciada
+2024-04-18 10:59:01,100 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_acucar.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:59:01,101 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_leite.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:59:01,102 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_mandioca.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:59:01,103 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_milho.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:59:01,104 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_ovo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:59:01,105 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_soja.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 
+2024-04-18 10:59:01,106 -       => Error:       (X) tools.py.[verifyFile]: O arquivo serie_trigo.xls não foi encontrado no caminho D:\Development\Python\dfi\arquivos\serie-historica\.: 

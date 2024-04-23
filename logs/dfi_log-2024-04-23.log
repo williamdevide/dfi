@@ -1,0 +1,29 @@
+2024-04-23 07:18:19,180 - DFI => Execução iniciada
+2024-04-23 07:18:26,629 -     => Main - Execução iniciada
+2024-04-23 07:18:26,633 -     => commodities - Execução iniciada
+2024-04-23 07:19:05,755 -       => Error:       (X) importXlsToDataframe.py.[executeImportXlsToDataframe]: Erro durante a importação de dados:: unsupported operand type(s) for -: 'str' and 'int'
+2024-04-23 07:19:29,682 - DFI => Execução iniciada
+2024-04-23 07:19:31,231 -     => Main - Execução iniciada
+2024-04-23 07:19:31,232 -     => commodities - Execução iniciada
+2024-04-23 07:21:09,058 - DFI => Execução iniciada
+2024-04-23 07:22:09,281 - DFI => Execução iniciada
+2024-04-23 07:22:31,858 - DFI => Execução iniciada
+2024-04-23 07:25:07,550 - DFI => Execução iniciada
+2024-04-23 07:25:58,305 - DFI => Execução iniciada
+2024-04-23 07:25:58,311 -     => Main - Execução iniciada
+2024-04-23 07:25:58,311 -     => commodities - Execução iniciada
+2024-04-23 07:26:50,753 -     => commodities - Execução concluída
+2024-04-23 07:26:50,758 -     => avacorp - Execução iniciada
+2024-04-23 07:27:13,768 -       => Error:       (X) connectDatabase.py.[connectDatabase]: Erro ao conectar ao database de Origem: : (psycopg2.OperationalError) connection to server at "168.75.71.21", port 5432 failed: Connection timed out (0x0000274C/10060)
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-04-23 07:27:25,472 - DFI => Execução iniciada
+2024-04-23 07:27:25,478 -     => Main - Execução iniciada
+2024-04-23 07:27:25,478 -     => commodities - Execução iniciada
+2024-04-23 07:28:29,500 -     => commodities - Execução concluída
+2024-04-23 07:28:29,508 -     => avacorp - Execução iniciada
+2024-04-23 07:30:08,849 -     => avacorp - Execução concluída
+2024-04-23 07:30:08,860 -     => Main - Execução concluída
+2024-04-23 07:30:54,143 - DFI => Execução iniciada
+2024-04-23 07:32:13,345 - DFI => Execução iniciada
