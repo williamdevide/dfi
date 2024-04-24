@@ -8,9 +8,22 @@ from src.config.infoParameters import infoParameters
 from src.script.tools.tools import verifyFile
 
 
-def readFileExcel(identity, dataframeHolder, file, address, sheet, header, columns, product, condictionColumn, condictionValue, typeFile):
+def readFileExcel(identity, dataframeHolder, product, typeFile):
+    file = product.get_name()
+    address = product.get_address()
+    sheet = product.get_sheet()
+    header = product.get_header()
+    columns = product.get_columns()
+    productItem = product.get_item()
+    condictionColumn = product.get_conditionColumns()
+    condictionValue = product.get_conditionValue()
+    conversionFactor = product.get_conversionFactor()
+    unitSource = product.get_unitSource()
+    unitDestiny = product.get_unitDestiny()
+    SAPProduct = product.get_SAPProduct()
+
     # Monta o caminho completo do arquivo
-    absolutePath = address + file
+    absolutePath = address + product.get_name()
 
     if typeFile == 'Origem':
         info = infoParameters(identity)
@@ -48,11 +61,14 @@ def readFileExcel(identity, dataframeHolder, file, address, sheet, header, colum
         df = df.reset_index(drop=True)
         dfRead[info.structureFieldsDataframeSource[0]] = pd.to_datetime(df[df.columns[0]], dayfirst=True)
         dfRead[info.structureFieldsDataframeSource[1]] = ''
-        dfRead[info.structureFieldsDataframeSource[2]] = product
-        dfRead[info.structureFieldsDataframeSource[3]] = ''
+        dfRead[info.structureFieldsDataframeSource[2]] = productItem
+        dfRead[info.structureFieldsDataframeSource[3]] = SAPProduct
         dfRead[info.structureFieldsDataframeSource[4]] = df[df.columns[1]]
         dfRead[info.structureFieldsDataframeSource[5]] = celTop[0][0]
-        dfRead[info.structureFieldsDataframeSource[6]] = ''
+        dfRead[info.structureFieldsDataframeSource[6]] = conversionFactor
+        dfRead[info.structureFieldsDataframeSource[7]] = unitSource
+        dfRead[info.structureFieldsDataframeSource[8]] = unitDestiny
+        dfRead[info.structureFieldsDataframeSource[9]] = df[df.columns[1]] * conversionFactor
 
         # Filtrar o DataFrame com base na data de importação
         totalRecords = dataframeHolder.count_regs_df('dfChargeDestiny')

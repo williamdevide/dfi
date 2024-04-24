@@ -5,7 +5,7 @@ from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileDestiny, infoFileSource
 from src.config.infoParameters import infoParameters
 from src.controller.databaseManipulation.operationsDB import readTableSQL
-from src.controller.dataframeManipulation.fillMissingValues import fillMissingPrice, fillMissingDayOfWeek, fillMissingProduct
+from src.controller.dataframeManipulation.fillMissingValues import fillMissingFieldIntervals, fillMissingDayOfWeek, fillMissingFieldFull
 from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, spLineBoxTaskItemWithRecords, spLineBoxTaskRecords, spLineBoxTaskErrors, \
     spLineBoxTaskItemWithOutRecords
 from src.script.tools.tools import verifySuccess, convertAndOrderByData, mergeDataframesByData

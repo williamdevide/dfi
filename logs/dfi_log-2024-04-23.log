@@ -27,3 +27,210 @@
 2024-04-23 07:30:08,860 -     => Main - Execução concluída
 2024-04-23 07:30:54,143 - DFI => Execução iniciada
 2024-04-23 07:32:13,345 - DFI => Execução iniciada
+2024-04-23 12:19:52,854 - DFI => Execução iniciada
+2024-04-23 14:00:51,285 - DFI => Execução iniciada
+2024-04-23 14:01:38,272 -     => Main - Execução iniciada
+2024-04-23 14:01:38,274 -     => commodities - Execução iniciada
+2024-04-23 14:14:10,175 - DFI => Execução iniciada
+2024-04-23 14:14:12,323 -     => Main - Execução iniciada
+2024-04-23 14:14:12,325 -     => commodities - Execução iniciada
+2024-04-23 14:23:01,145 - DFI => Execução iniciada
+2024-04-23 14:23:01,150 -     => Main - Execução iniciada
+2024-04-23 14:23:01,151 -     => commodities - Execução iniciada
+2024-04-23 14:24:11,544 - DFI => Execução iniciada
+2024-04-23 14:24:11,550 -     => Main - Execução iniciada
+2024-04-23 14:24:11,550 -     => commodities - Execução iniciada
+2024-04-23 14:32:21,842 - DFI => Execução iniciada
+2024-04-23 14:32:21,848 -     => Main - Execução iniciada
+2024-04-23 14:32:21,848 -     => commodities - Execução iniciada
+2024-04-23 14:33:15,674 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42S22', "[42S22] [Microsoft][SQL Server Native Client 11.0][SQL Server]Nome de coluna 'comhis_unit' inválido. (207) (SQLExecDirectW); [42S22] [Microsoft][SQL Server Native Client 11.0][SQL Server]Existem menos colunas na instrução INSERT do que valores especificados na cláusula VALUES. O número de valores na cláusula VALUES deve corresponder ao número de colunas especificado na instrução INSERT. (110)")
+[SQL: MERGE INTO MRV_Commodity_History AS target
+        USING MRV_comhis_temp AS source
+        ON target.comhis_date = source.comhis_date AND target.comhis_day_week = source.comhis_day_week AND target.comhis_commodity = source.comhis_commodity
+        WHEN MATCHED THEN
+            UPDATE SET target.comhis_date = source.comhis_date, target.comhis_day_week = source.comhis_day_week, target.comhis_commodity = source.comhis_commodity,
+                target.comhis_SAP_product = source.comhis_SAP_product, target.comhis_price = source.comhis_price, target.comhis_indicator = source.comhis_indicator,
+                target.comhis_unit_source = source.comhis_unit_source, target.comhis_unit_destiny = source.comhis_unit_destiny,
+                target.comhis_conversion_factor = source.comhis_conversion_factor
+        WHEN NOT MATCHED THEN
+            INSERT (comhis_date, comhis_day_week, comhis_commodity, comhis_SAP_product, comhis_price, comhis_indicator, comhis_unit) VALUES
+                (source.comhis_date, source.comhis_day_week, source.comhis_commodity, source.comhis_SAP_product, source.comhis_price, source.comhis_indicator,
+                source.comhis_unit_source, source.comhis_unit_destiny, source.comhis_conversion_factor);
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 14:34:49,667 - DFI => Execução iniciada
+2024-04-23 14:34:49,673 -     => Main - Execução iniciada
+2024-04-23 14:34:49,673 -     => commodities - Execução iniciada
+2024-04-23 14:35:42,131 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42S22', "[42S22] [Microsoft][SQL Server Native Client 11.0][SQL Server]Nome de coluna 'comhis_unit' inválido. (207) (SQLExecDirectW); [42S22] [Microsoft][SQL Server Native Client 11.0][SQL Server]Existem menos colunas na instrução INSERT do que valores especificados na cláusula VALUES. O número de valores na cláusula VALUES deve corresponder ao número de colunas especificado na instrução INSERT. (110)")
+[SQL: MERGE INTO MRV_Commodity_History AS target
+        USING MRV_comhis_temp AS source
+        ON target.comhis_date = source.comhis_date AND target.comhis_day_week = source.comhis_day_week AND target.comhis_commodity = source.comhis_commodity
+        WHEN MATCHED THEN
+            UPDATE SET target.comhis_date = source.comhis_date, target.comhis_day_week = source.comhis_day_week, target.comhis_commodity = source.comhis_commodity,
+                target.comhis_SAP_product = source.comhis_SAP_product, target.comhis_price = source.comhis_price, target.comhis_indicator = source.comhis_indicator,
+                target.comhis_unit_source = source.comhis_unit_source, target.comhis_unit_destiny = source.comhis_unit_destiny,
+                target.comhis_conversion_factor = source.comhis_conversion_factor, target.comhis_price_unit = source.comhis_price_unit
+        WHEN NOT MATCHED THEN
+            INSERT (comhis_date, comhis_day_week, comhis_commodity, comhis_SAP_product, comhis_price, comhis_indicator, comhis_unit) VALUES
+                (source.comhis_date, source.comhis_day_week, source.comhis_commodity, source.comhis_SAP_product, source.comhis_price, source.comhis_indicator,
+                source.comhis_unit_source, source.comhis_unit_destiny, source.comhis_conversion_factor, source.comhis_price_unit);
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 14:36:07,176 - DFI => Execução iniciada
+2024-04-23 14:36:09,833 -     => Main - Execução iniciada
+2024-04-23 14:36:09,834 -     => commodities - Execução iniciada
+2024-04-23 14:54:07,052 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42S22', "[42S22] [Microsoft][SQL Server Native Client 11.0][SQL Server]Nome de coluna 'comhis_unit' inválido. (207) (SQLExecDirectW); [42S22] [Microsoft][SQL Server Native Client 11.0][SQL Server]Existem menos colunas na instrução INSERT do que valores especificados na cláusula VALUES. O número de valores na cláusula VALUES deve corresponder ao número de colunas especificado na instrução INSERT. (110)")
+[SQL: MERGE INTO MRV_Commodity_History AS target
+        USING MRV_comhis_temp AS source
+        ON target.comhis_date = source.comhis_date AND target.comhis_day_week = source.comhis_day_week AND target.comhis_commodity = source.comhis_commodity
+        WHEN MATCHED THEN
+            UPDATE SET target.comhis_date = source.comhis_date, target.comhis_day_week = source.comhis_day_week, target.comhis_commodity = source.comhis_commodity,
+                target.comhis_SAP_product = source.comhis_SAP_product, target.comhis_price = source.comhis_price, target.comhis_indicator = source.comhis_indicator,
+                target.comhis_unit_source = source.comhis_unit_source, target.comhis_unit_destiny = source.comhis_unit_destiny,
+                target.comhis_conversion_factor = source.comhis_conversion_factor, target.comhis_price_unit = source.comhis_price_unit
+        WHEN NOT MATCHED THEN
+            INSERT (comhis_date, comhis_day_week, comhis_commodity, comhis_SAP_product, comhis_price, comhis_indicator, comhis_unit) VALUES
+                (source.comhis_date, source.comhis_day_week, source.comhis_commodity, source.comhis_SAP_product, source.comhis_price, source.comhis_indicator,
+                source.comhis_unit_source, source.comhis_unit_destiny, source.comhis_conversion_factor, source.comhis_price_unit);
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 14:54:45,352 - DFI => Execução iniciada
+2024-04-23 14:54:49,822 -     => Main - Execução iniciada
+2024-04-23 14:54:49,827 -     => commodities - Execução iniciada
+2024-04-23 15:04:23,264 - DFI => Execução iniciada
+2024-04-23 15:04:23,282 -     => Main - Execução iniciada
+2024-04-23 15:04:23,283 -     => commodities - Execução iniciada
+2024-04-23 15:06:36,729 -     => commodities - Execução concluída
+2024-04-23 15:06:36,735 -     => avacorp - Execução iniciada
+2024-04-23 15:08:53,605 -     => avacorp - Execução concluída
+2024-04-23 15:08:53,619 -     => Main - Execução concluída
+2024-04-23 15:09:23,403 - DFI => Execução iniciada
+2024-04-23 15:09:23,422 -     => Main - Execução iniciada
+2024-04-23 15:09:23,423 -     => commodities - Execução iniciada
+2024-04-23 15:10:56,455 - DFI => Execução iniciada
+2024-04-23 15:10:56,474 -     => Main - Execução iniciada
+2024-04-23 15:10:56,476 -     => commodities - Execução iniciada
+2024-04-23 15:13:19,239 -       => Error:       (X) importXlsToDataframe.py.[importXlsSeriesToDataframe]: Erro ao importar informações dos arquivos em série:: 'LineBreakpoint' object has no attribute 'stop_monitoring'
+2024-04-23 15:13:32,863 - DFI => Execução iniciada
+2024-04-23 15:13:32,882 -     => Main - Execução iniciada
+2024-04-23 15:13:32,883 -     => commodities - Execução iniciada
+2024-04-23 15:25:24,097 - DFI => Execução iniciada
+2024-04-23 15:25:24,103 -     => Main - Execução iniciada
+2024-04-23 15:25:24,103 -     => commodities - Execução iniciada
+2024-04-23 15:25:28,338 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][SQL Server Native Client 11.0][SQL Server]Sintaxe incorreta próxima a ')'. (102) (SQLExecDirectW)")
+[SQL: 
+CREATE TABLE dbo.[MRV_comhis_temp] (
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 15:25:57,896 - DFI => Execução iniciada
+2024-04-23 15:25:57,902 -     => Main - Execução iniciada
+2024-04-23 15:25:57,902 -     => commodities - Execução iniciada
+2024-04-23 15:26:02,128 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][SQL Server Native Client 11.0][SQL Server]Sintaxe incorreta próxima a ')'. (102) (SQLExecDirectW)")
+[SQL: 
+CREATE TABLE dbo.[MRV_comhis_temp] (
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 15:27:00,290 - DFI => Execução iniciada
+2024-04-23 15:27:00,296 -     => Main - Execução iniciada
+2024-04-23 15:27:00,296 -     => commodities - Execução iniciada
+2024-04-23 15:27:04,226 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][SQL Server Native Client 11.0][SQL Server]Sintaxe incorreta próxima a ')'. (102) (SQLExecDirectW)")
+[SQL: 
+CREATE TABLE dbo.[MRV_comhis_temp] (
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 15:27:34,095 - DFI => Execução iniciada
+2024-04-23 15:27:34,113 -     => Main - Execução iniciada
+2024-04-23 15:27:34,114 -     => commodities - Execução iniciada
+2024-04-23 15:27:54,366 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: (pyodbc.ProgrammingError) ('42000', "[42000] [Microsoft][SQL Server Native Client 11.0][SQL Server]Sintaxe incorreta próxima a ')'. (102) (SQLExecDirectW)")
+[SQL: 
+CREATE TABLE dbo.[MRV_comhis_temp] (
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-04-23 15:28:04,125 - DFI => Execução iniciada
+2024-04-23 15:28:04,143 -     => Main - Execução iniciada
+2024-04-23 15:28:04,144 -     => commodities - Execução iniciada
+2024-04-23 15:31:06,345 - DFI => Execução iniciada
+2024-04-23 15:31:06,364 -     => Main - Execução iniciada
+2024-04-23 15:31:06,365 -     => commodities - Execução iniciada
+2024-04-23 15:32:40,048 - DFI => Execução iniciada
+2024-04-23 15:32:40,065 -     => Main - Execução iniciada
+2024-04-23 15:32:40,066 -     => commodities - Execução iniciada
+2024-04-23 15:36:07,873 - DFI => Execução iniciada
+2024-04-23 15:36:07,892 -     => Main - Execução iniciada
+2024-04-23 15:36:07,892 -     => commodities - Execução iniciada
+2024-04-23 15:41:05,639 - DFI => Execução iniciada
+2024-04-23 15:41:05,657 -     => Main - Execução iniciada
+2024-04-23 15:41:05,659 -     => commodities - Execução iniciada
+2024-04-23 15:43:25,517 -     => commodities - Execução concluída
+2024-04-23 15:43:25,525 -     => avacorp - Execução iniciada
+2024-04-23 15:44:12,530 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2024-04-23 15:45:42,889 - DFI => Execução iniciada
+2024-04-23 15:45:42,907 -     => Main - Execução iniciada
+2024-04-23 15:45:42,908 -     => commodities - Execução iniciada
+2024-04-23 15:57:27,003 - DFI => Execução iniciada
+2024-04-23 15:57:27,021 -     => Main - Execução iniciada
+2024-04-23 15:57:27,022 -     => commodities - Execução iniciada
+2024-04-23 16:37:55,713 -     => commodities - Execução concluída
+2024-04-23 16:37:55,721 -     => avacorp - Execução iniciada
+2024-04-23 16:40:37,648 - DFI => Execução iniciada
+2024-04-23 16:40:37,654 -     => Main - Execução iniciada
+2024-04-23 16:40:37,654 -     => commodities - Execução iniciada
+2024-04-23 16:40:52,067 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2024-04-23 16:41:08,700 - DFI => Execução iniciada
+2024-04-23 16:41:08,706 -     => Main - Execução iniciada
+2024-04-23 16:41:08,706 -     => commodities - Execução iniciada
+2024-04-23 16:42:18,723 -     => commodities - Execução concluída
+2024-04-23 16:42:18,735 -     => avacorp - Execução iniciada
+2024-04-23 16:43:46,660 -     => avacorp - Execução concluída
+2024-04-23 16:43:46,673 -     => Main - Execução concluída
+2024-04-23 16:45:46,741 -     => Main - Execução iniciada
+2024-04-23 16:45:46,742 -     => commodities - Execução iniciada
+2024-04-23 16:47:43,609 -     => commodities - Execução concluída
+2024-04-23 16:47:43,683 -     => avacorp - Execução iniciada
+2024-04-23 16:48:00,450 - DFI => Execução iniciada
+2024-04-23 16:48:00,468 -     => Main - Execução iniciada
+2024-04-23 16:48:00,469 -     => commodities - Execução iniciada
+2024-04-23 16:49:07,744 - DFI => Execução iniciada
+2024-04-23 16:49:07,763 -     => Main - Execução iniciada
+2024-04-23 16:49:07,764 -     => commodities - Execução iniciada
+2024-04-23 16:56:25,633 -     => commodities - Execução concluída
+2024-04-23 16:56:25,641 -     => avacorp - Execução iniciada
+2024-04-23 16:58:34,182 -     => avacorp - Execução concluída
+2024-04-23 16:58:34,194 -     => Main - Execução concluída
+2024-04-23 17:00:34,274 -     => Main - Execução iniciada
+2024-04-23 17:00:34,277 -     => commodities - Execução iniciada
+2024-04-23 17:04:24,929 - DFI => Execução iniciada
+2024-04-23 17:04:24,947 -     => Main - Execução iniciada
+2024-04-23 17:04:24,948 -     => commodities - Execução iniciada
+2024-04-23 17:06:35,985 -     => commodities - Execução concluída
+2024-04-23 17:06:36,000 -     => avacorp - Execução iniciada
+2024-04-23 17:07:16,315 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2024-04-23 17:31:23,287 - DFI => Execução iniciada
+2024-04-23 17:31:23,293 -     => Main - Execução iniciada
+2024-04-23 17:31:23,293 -     => commodities - Execução iniciada
+2024-04-23 17:31:23,929 -       => Error:       (X) importXlsToDataframe.py.[executeImportXlsToDataframe]: Erro durante a importação de dados:: ufunc 'multiply' did not contain a loop with signature matching types (dtype('float64'), dtype('<U4')) -> None
+2024-04-23 17:32:18,126 - DFI => Execução iniciada
+2024-04-23 17:32:18,145 -     => Main - Execução iniciada
+2024-04-23 17:32:18,146 -     => commodities - Execução iniciada
+2024-04-23 17:33:49,587 - DFI => Execução iniciada
+2024-04-23 17:47:08,625 - DFI => Execução iniciada
+2024-04-23 17:47:39,519 - DFI => Execução iniciada
+2024-04-23 17:47:39,525 -     => Main - Execução iniciada
+2024-04-23 17:47:39,525 -     => commodities - Execução iniciada
+2024-04-23 17:48:30,700 -     => commodities - Execução concluída
+2024-04-23 17:48:30,712 -     => avacorp - Execução iniciada
+2024-04-23 17:49:27,824 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2024-04-23 17:49:45,884 - DFI => Execução iniciada
+2024-04-23 17:49:45,890 -     => Main - Execução iniciada
+2024-04-23 17:49:45,890 -     => commodities - Execução iniciada
+2024-04-23 17:50:39,520 -     => commodities - Execução concluída
+2024-04-23 17:50:39,530 -     => avacorp - Execução iniciada
+2024-04-23 17:51:23,670 -       => Error:       (X) exportDataframeToDatabase.py.[exportDataframeToDatabase]: Erro ao exportar informações para o(s) database(s) de Destino:: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)

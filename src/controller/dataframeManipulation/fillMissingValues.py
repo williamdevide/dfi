@@ -4,7 +4,7 @@ from src.script.tools.tools import getColumnIndex, getWeekdayName
 
 
 # Function para preencher os dias sem valor com o valor do próximo dia com valor
-def fillMissingPrice(identity, df, columnName):
+def fillMissingFieldIntervals(identity, df, columnName):
     column = getColumnIndex(df, columnName)
     first_value = df.iloc[:, column].first_valid_index()
 
@@ -20,8 +20,8 @@ def fillMissingPrice(identity, df, columnName):
     return df
 
 
-def fillMissingProduct(identity, df, fieldProduct, product):
-    df[fieldProduct] = product
+def fillMissingFieldFull(identity, df, field, value):
+    df[field] = value
     return df
 
 

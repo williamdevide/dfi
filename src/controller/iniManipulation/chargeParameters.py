@@ -54,6 +54,11 @@ def _readParameterIni(file_path):
                                 current_item = True
                             elif current_item.lower() == 'false':
                                 current_item = False
+
+                            float_value = float(current_item.replace(',', ''))
+                            if not str(float_value).isdigit():
+                                current_item = float_value
+
                         # current_item = datetime.strptime(current_item, date_format).date()
                         current_item = current_item
                 except ValueError:

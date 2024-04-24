@@ -1,6 +1,6 @@
 class SourceProduct:
     def __init__(self, item: str, name: str, url: str, address: str, sheet: str, header: int,
-                 columns: list[str], conditionColumns: str, conditionValue: str):
+                 columns: list[str], conditionColumns: str, conditionValue: str, conversionFactor: float, unitSource: str, unitDestiny: str, SAPProduct: str):
         self.__item = item
         self.__name = name
         self.__url = url
@@ -10,6 +10,10 @@ class SourceProduct:
         self.__columns = columns
         self.__conditionColumns = conditionColumns
         self.__conditionValue = conditionValue
+        self.__conversionFactor = conversionFactor
+        self.__unitSource = unitSource
+        self.__unitDestiny = unitDestiny
+        self.__SAPProduct = SAPProduct
 
     # Getters
     def get_item(self) -> str:
@@ -39,6 +43,18 @@ class SourceProduct:
     def get_conditionValue(self) -> str:
         return self.__conditionValue
 
+    def get_conversionFactor(self) -> float:
+        return self.__conversionFactor
+
+    def get_unitSource(self) -> str:
+        return self.__unitSource
+
+    def get_unitDestiny(self) -> str:
+        return self.__unitDestiny
+
+    def get_SAPProduct(self) -> str:
+        return self.__SAPProduct
+
     # Setters
     def set_item(self, item: str):
         self.__item = item
@@ -66,6 +82,18 @@ class SourceProduct:
 
     def set_conditionValue(self, conditionValue: str):
         self.__conditionValue = conditionValue
+
+    def set_conversionFactor(self, conversionFactor: float):
+        self.__conversionFactor = conversionFactor
+
+    def set_unitSource(self, unitSource: str):
+        self.__unitSource = unitSource
+
+    def set_unitDestiny(self, unitDestiny: str):
+        self.__unitDestiny = unitDestiny
+
+    def set_SAPProduct(self, SAPProduct: str):
+        self.__SAPProduct = SAPProduct
 
 
 # Dicionário para armazenar os objetos SourceProduct

@@ -67,6 +67,8 @@ def writeTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeC
         input()
 
     dataframe = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
+    if dataframe.empty:
+        dataframe = dataframeHolder.get_df('df' + table.get_programName())
 
     # Gravando dataframe na tabela de destino
     if table.get_destinyTemp() != '':

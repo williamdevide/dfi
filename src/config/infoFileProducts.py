@@ -30,6 +30,10 @@ def addInformationProduct(identity, product):
     columns = commodity[6]                                          # CABEÇALHO DAS COLUNAS NA PLANILHA ORIGEM
     conditionColumns = commodity[7]                                 # COLUNA PARA FILTRO
     conditionValue = commodity[8]                                   # VALOR PARA FILTRO
+    conversionFactor = commodity[9]                                 # FATOR DE CONVERSÃO DO PRODUTO (VALOR NUMERICO PARA CALCULO DO PRODUTO)
+    unitSource = commodity[10]                                      # UNIDADE COMERCIAL NA PLANILHA DE ENTRADA
+    unitDestiny = commodity[11]                                     # UNIDADE COMERCIAL UTILIZADA NA MARVI
+    SAPProduct = commodity[12]                                      # CÓDIGO DO PRODDUTO NO SAP
 
-    return SourceProduct(item, name, url, address, sheet, header, columns, conditionColumns, conditionValue)
+    return SourceProduct(item, name, url, address, sheet, header, columns, conditionColumns, conditionValue, conversionFactor, unitSource, unitDestiny, SAPProduct)
 

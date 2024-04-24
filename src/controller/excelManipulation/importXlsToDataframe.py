@@ -4,7 +4,7 @@ from src.config.infoFile import infoFileDestiny
 from src.config.infoFileProducts import infoFileProduct
 from src.config.infoParameters import infoParameters
 from src.controller.dataframeManipulation.prepareAmbient import prepareAmbient
-from src.controller.dataframeManipulation.fillMissingValues import fillMissingPrice, fillMissingDayOfWeek, fillMissingProduct
+from src.controller.dataframeManipulation.fillMissingValues import fillMissingFieldIntervals, fillMissingDayOfWeek, fillMissingFieldFull
 from src.controller.dataframeManipulation.unionDataframes import unionDataframes
 from src.controller.dataframeManipulation.updateDataframe import updateDataframe
 from src.script.tools.screenPrint import spLineBoxTaskRecords, spLineBoxTaskOpen, spLineBoxTaskItemWithOutRecords, spLineBoxTaskItemWithRecords, spLineBoxTaskClose, \
@@ -69,11 +69,10 @@ def importXlsFinalToDataframe(identity, dataframeHolder):
         return False
 
 
-def executeImportXlsToDataframe(identity, dataframeHolder, entity, typeFile):
+def executeImportXlsToDataframe(identity, dataframeHolder, product, typeFile):
     try:
         # Realiza a leitura do excel de origem caso existente
-        success, dfTemp = readFileExcel(identity, dataframeHolder, entity.get_name(), entity.get_address(), entity.get_sheet(), entity.get_header(), entity.get_columns(), entity.get_item(),
-                                        entity.get_conditionColumns(), entity.get_conditionValue(), typeFile)
+        success, dfTemp = readFileExcel(identity, dataframeHolder, product, typeFile)
 
         if not success:
             return False
@@ -90,15 +89,20 @@ def executeImportXlsToDataframe(identity, dataframeHolder, entity, typeFile):
                 # Dataframe principal recebe os dados do dataframe local
                 dfAmbient = dataframeHolder.get_df('dfAmbient')
                 dfTemp = mergeDataframesByData(identity, dfAmbient, dfTemp)
-                dfTemp = fillMissingPrice(identity, dfTemp, info.priceField)
-                dfTemp = fillMissingProduct(identity, dfTemp, info.structureFieldsDataframeSource[2], entity.get_item())
+                dfTemp = fillMissingFieldIntervals(identity, dfTemp, info.priceField)
+                dfTemp = fillMissingFieldIntervals(identity, dfTemp, 'comhis_price_unit')
+                dfTemp = fillMissingFieldFull(identity, dfTemp, 'comhis_conversion_factor', product.get_conversionFactor())
+                dfTemp = fillMissingFieldFull(identity, dfTemp, 'comhis_unit_destiny', product.get_unitDestiny())
+                dfTemp = fillMissingFieldFull(identity, dfTemp, 'comhis_unit_source', product.get_unitSource())
+                dfTemp = fillMissingFieldFull(identity, dfTemp, 'comhis_SAP_product', product.get_SAPProduct())
+                dfTemp = fillMissingFieldFull(identity, dfTemp, info.structureFieldsDataframeSource[2], product.get_item())
         else:
             if typeFile == 'Destino':
                 dfTemp = pd.DataFrame()
 
         totalRecords = '[' + str(dfTemp.shape[0]).rjust(6) + ' records]'
         spLineBoxTaskRecords(totalRecords)
-        dataframeHolder.add_df('df'+entity.get_item(), dfTemp)
+        dataframeHolder.add_df('df'+product.get_item(), dfTemp)
 
         return True
 
