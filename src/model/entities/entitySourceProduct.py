@@ -1,6 +1,8 @@
 class SourceProduct:
-    def __init__(self, item: str, name: str, url: str, address: str, sheet: str, header: int,
+    def __init__(self, importar: str, importMethod: str, item: str, name: str, url: str, address: str, sheet: str, header: int,
                  columns: list[str], conditionColumns: str, conditionValue: str, conversionFactor: float, unitSource: str, unitDestiny: str, SAPProduct: str):
+        self.__importar = importar
+        self.__importMethod = importMethod
         self.__item = item
         self.__name = name
         self.__url = url
@@ -16,6 +18,12 @@ class SourceProduct:
         self.__SAPProduct = SAPProduct
 
     # Getters
+    def get_importar(self) -> str:
+        return self.__importar
+
+    def get_importMethod(self) -> str:
+        return self.__importMethod
+
     def get_item(self) -> str:
         return self.__item
 
@@ -56,6 +64,12 @@ class SourceProduct:
         return self.__SAPProduct
 
     # Setters
+    def set_importar(self, importar: str):
+        self.__importar = importar
+
+    def set_importMethod(self, importMethod: str):
+        self.__importMethod = importMethod
+
     def set_item(self, item: str):
         self.__item = item
 

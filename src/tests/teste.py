@@ -1,43 +1,51 @@
-import os
-
 import requests
+from bs4 import BeautifulSoup
+import pandas as pd
 
-'''
-print('Teste ini')
+# Defina as datas iniciais e finais
+dataIni = "2024-01-01"
+dataFim = "2024-04-01"
 
-root_dir = os.getcwd()
-ini_file_path = os.path.join(root_dir, 'parameters.ini')
+# URL da página inicial
+url = "https://celepar7.pr.gov.br/ceasa/cotprod_evolucao.asp"
 
-with open(ini_file_path, 'r', encoding=None) as file:
-    for line in file:
-        line = line.strip()
-        print(line)
+# Dados do formulário
+form_data = {
+    'dataIni': dataIni,
+    'dataFim': dataFim,
+    'cmbProdutos': "701'1'2"
+}
 
+# Faz a solicitação POST
+response = requests.post(url, data=form_data)
 
-print('')
-print('Final do arquivo.')
-input()
-'''
+# Verifica se a solicitação foi bem-sucedida
+if response.status_code == 200:
+    # URL da página com os resultados
+    result_url = "https://celepar7.pr.gov.br/ceasa/result_evolucao_precos.asp"
 
-print('Teste download')
+    # Faz a solicitação GET para a página de resultados
+    result_response = requests.get(result_url)
 
-try:
-    headersBrowser = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-    url = 'https://www.cepea.esalq.usp.br/br/indicador/series/acucar.aspx?id=53'
-    response = requests.get(url, headers=headersBrowser)
-    print(response.status_code)
-    if response.status_code == 200:
-        # Open the file in binary write mode and save the content
-        saveLocation = 'D:\\dfi\\arquivos\\serie-historica\\'
-        fileName = 'serie_acucar.xls'
-        with open(f'{saveLocation}/{fileName}', 'wb') as file:
-            file.write(response.content)
+    # Verifica se a solicitação foi bem-sucedida
+    if result_response.status_code == 200:
+        # Analisa o HTML da página de resultados
+        soup = BeautifulSoup(result_response.content, 'html.parser')
+
+        # Encontra todas as tabelas na página
+        tables = soup.find_all('table')
+
+        # Salva as tabelas em dataframes
+        dfs = []
+        for table in tables:
+            dfs.append(pd.read_html(str(table))[0])
+
+        # Imprime os dataframes
+        for i, df in enumerate(dfs):
+            print("DataFrame", i + 1)
+            print(df)
+            print()
     else:
-        print(f' -> O download do arquivo falhou. Código de status: {response.status_code}')
-
-except Exception as e:
-    print(f' -> Erro capturado: {str(e)}')
-
-print('')
-print('Final do arquivo.')
-input()
+        print("Erro ao obter página de resultados.")
+else:
+    print("Erro ao acessar a página inicial.")

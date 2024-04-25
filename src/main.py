@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 
+from src.script.main.mainBalancaSP6000 import mainBalancaSP6000
 from src.script.tools.tools import getParameter
 from src.script.main.mainCommodities import mainCommodities
 from src.script.main.mainAvacorp import mainAvacorp
@@ -17,6 +18,7 @@ def main():
     # Definição de execução dos programas
     mainCommodities() if getParameter('dfprograms', 'commodities') else None
     mainAvacorp() if getParameter('dfprograms', 'avacorp') else None
+    mainBalancaSP6000() if getParameter('dfprograms', 'balancasp6000') else None
 
     # Registrando a conclusão da execução no log
     logging.info("    => Main - Execução concluída")

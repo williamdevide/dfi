@@ -1,19 +1,17 @@
 import logging
-import sys
-from datetime import datetime
 
 from src.config import infoDatabase, infoDatabaseTables
 from src.config.infoDatabase import infoDatabaseDestiny, dbDestiny, dbSource
-from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, removeDatabaseTableSourceAndDestiny
+from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, removeDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileDestiny, infoFileSource
 from src.config.infoFileProducts import infoFileProduct
 from src.config.infoParameters import infoParameters
 from src.controller.dataframeManipulation.createMainDataframe import createMainDataframe
-from src.controller.httpManipulation.downloadXlsSeries import downloadXlsSeries
+
 from src.controller.excelManipulation.importXlsToDataframe import importXlsSeriesToDataframe
-from src.controller.connections.connectFileXls import connectFileXlsSource
+from src.controller.connections.connectFile import connectFile
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileExportDestiny
-from src.model.entities.entityDatabaseTableSourceAndDestiny import dictionary_tables
+
 from src.script.tools.screenPrint import spLineBoxUp, spLineBoxTitle, spLineBoxDown, spLineBoxMiddle, spLineBoxText, spLineBoxBlank, spLineBlank, spCount, spHeader, \
     spLineBoxError
 from src.script.tools.tools import verifySuccess, getParameter
@@ -38,7 +36,7 @@ def mainCommodities():
     strInfoSource = ''
     if infoParameter.tecnologyDatastoreSource == 'Excel':
         infoFSource = infoFileSource(identity)
-        strInfoSource = 'Local\\Arquivo: ' + infoFSource.get_address() + ":" + infoFSource.get_name()
+        strInfoSource = 'Local : Arquivo: ' + infoFSource.get_address() + " : " + infoFSource.get_name()
     else:
         spLineBoxError('Parâmetro encontrado com valor incorreto: Esse módulo aceita somente a origem [Excel]')
         input()
@@ -69,19 +67,22 @@ def mainCommodities():
     spHeader()
     spLineBoxMiddle()
 
-    selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)                            # Seleciona o tipo de importação da base de destino e realiza a importação para o dfChargeDestiny
+    selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)                            # Seleciona o tipo de importação da base de destino e
+    # realiza a importação para o dfChargeDestiny
     spLineBoxMiddle()
     verifySuccess(createMainDataframe(identity, dataframeHolder, infoParameter, infoTables))                    # Cria mainDF
     spLineBoxMiddle()
-    verifySuccess(connectFileXlsSource(identity, dataframeHolder, infoParameter, infoTables, infoProduct))      # Cria a matriz com os objetos contendo as informações dos produtos
+    verifySuccess(connectFile(identity, dataframeHolder, infoParameter, infoTables, infoProduct, 'Origem'))      # Cria a matriz com os objetos contendo as informações dos produtos
     spLineBoxMiddle()
     # verifySuccess(downloadXlsSeries(identity))                                                                  # Realiza download dos arquivos de séries xls
     spLineBoxMiddle()
-    verifySuccess(importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, infoTables, infoProduct)) # Após carregamento inicial do dfChargeDestiny realiza a importação em série dos arquivos xlsx para cada df
+    verifySuccess(importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, infoTables, infoProduct))
     spLineBoxMiddle()
-    selectProfileExportDestiny(identity, dataframeHolder, infoParameter, infoTables)                             # Seleciona o tipo de exportação da base de destino e realiza a exportação
+    selectProfileExportDestiny(identity, dataframeHolder, infoParameter, infoTables)                             # Seleciona o tipo de exportação da base de destino e
+    # realiza a exp
     spLineBoxMiddle()
-    selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)                             # Seleciona o tipo de importação da base de destino e realiza a importação para o dfChargeDestiny
+    selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)                             # Seleciona o tipo de importação da base de destino e
+    # realiza a importação para o dfChargeDestiny
     spLineBoxDown()
 
     spLineBoxUp()
@@ -89,7 +90,7 @@ def mainCommodities():
     spLineBoxDown()
     spLineBlank()
 
-    removeDatabaseTableSourceAndDestiny('Commodity_History')
+    clearDatabaseTableSourceAndDestiny(infoTables)
 
     # Registrando a conclusão da execução no log
     logging.info("    => {} - Execução concluída".format(identity))

@@ -35,3 +35,11 @@ def addInformationTable(identity, program):
 
 
     return TableSourceAndDestiny(programName, source, destiny, destinyTemp, destinyMerge)
+
+def clearDatabaseTableSourceAndDestiny(infoTables):
+    indexTable = []
+    for index, (program, table) in enumerate(infoTables.items(), start=1):
+        indexTable.append(program)
+
+    for indexTable in indexTable:
+        remove_table(indexTable)

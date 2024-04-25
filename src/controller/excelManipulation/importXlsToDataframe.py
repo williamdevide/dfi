@@ -8,7 +8,7 @@ from src.controller.dataframeManipulation.fillMissingValues import fillMissingFi
 from src.controller.dataframeManipulation.unionDataframes import unionDataframes
 from src.controller.dataframeManipulation.updateDataframe import updateDataframe
 from src.script.tools.screenPrint import spLineBoxTaskRecords, spLineBoxTaskOpen, spLineBoxTaskItemWithOutRecords, spLineBoxTaskItemWithRecords, spLineBoxTaskClose, \
-    spLineBoxTaskErrors
+    spLineBoxTaskErrors, spLineBoxTaskStatus
 from src.script.tools.tools import verifySuccess, convertAndOrderByData, mergeDataframesByData
 from src.controller.excelManipulation.operationsExcel import readFileExcel
 
@@ -21,24 +21,38 @@ def importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, tables,
         spLineBoxTaskItemWithOutRecords('Preparando Ambiente:')
         verifySuccess(prepareAmbient(identity, dataframeHolder, infoParameter, tables, products))
 
-        # Iterate over the list and call downloadFile function for each item
-        for index, (product_name, product) in enumerate(products.items(), start=1):
-            totalFiles = len(products)
-    
-            # Exibindo o número do índice e o número total de produtos
-            strMsg = 'Importing...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Arquivo:[' + product.get_name() + ']: '
-            spLineBoxTaskItemWithRecords(strMsg)
+        totalFiles = len(products)
+        totalFilesYes = sum(1 for df in products.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
 
-            # Realiza a chamada para importação do xls para o dataframe
-            verifySuccess(executeImportXlsToDataframe(identity, dataframeHolder, product, 'Origem'))
+        if totalFilesYes < totalFiles:
+            if totalFilesYes == 0:
+                strMsg = f'Informação: Foram encontrados parâmetros para {totalFiles} commodities, mas nenhum será importado.'
+            else:
+                strMsg = f'Informação: Foram encontrados parâmetros para {totalFiles} commodities, mas somente {totalFilesYes} serão importados.'
+            spLineBoxTaskItemWithOutRecords(strMsg)
+            spLineBoxTaskStatus('')
 
-        # Gerando dataframe final com a união dos dataframes de produtos
-        spLineBoxTaskItemWithOutRecords('Unindo Dataframes:')
-        verifySuccess(unionDataframes(identity, dataframeHolder, infoParameter, tables, products))
+        if totalFilesYes > 0:
+            # Iterate over the list and call downloadFile function for each item
+            for index, (product_name, product) in enumerate(products.items(), start=1):
 
-        # Atualizando dfChargeDestiny com os valores do dfUnion
-        spLineBoxTaskItemWithOutRecords('Atualizando Dataframe inicial:')
-        verifySuccess(updateDataframe(identity, dataframeHolder, infoParameter, tables, products))
+                if product.get_importar() == 'SIM':
+
+                    # Exibindo o número do índice e o número total de produtos
+                    strMsg = 'Importing...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Arquivo:[' + product.get_name() + ']: '
+                    spLineBoxTaskItemWithRecords(strMsg)
+
+                    if product.get_importMethod() == 'Download-xls':
+                        # Realiza a chamada para importação do xls para o dataframe
+                        verifySuccess(executeImportXlsToDataframe(identity, dataframeHolder, product, 'Origem'))
+
+            # Gerando dataframe final com a união dos dataframes de produtos
+            spLineBoxTaskItemWithOutRecords('Unindo Dataframes:')
+            verifySuccess(unionDataframes(identity, dataframeHolder, infoParameter, tables, products))
+
+            # Atualizando dfChargeDestiny com os valores do dfUnion
+            spLineBoxTaskItemWithOutRecords('Atualizando Dataframe inicial:')
+            verifySuccess(updateDataframe(identity, dataframeHolder, infoParameter, tables, products))
 
         spLineBoxTaskClose('Final da importação dos arquivos em série Xlsx para Dataframe principal:')
         return True

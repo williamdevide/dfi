@@ -55,3 +55,5 @@ def remove_table(program):
         del dictionary_tables[program]
     else:
         print(f"Tabela '{program}' não encontrada no dicionário.")
+
+

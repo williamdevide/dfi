@@ -47,3 +47,5 @@ urllib3==2.2.1
 wcwidth==0.2.13
 wheel==0.43.0
 xlrd==2.0.1
+
+selenium~=4.19.0

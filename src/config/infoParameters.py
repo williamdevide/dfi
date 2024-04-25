@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from src.model.entities.entityParametersApplication import ParametersApplication
 from src.script.tools.tools import getWeekdayName, getParameter
 
-
+# CONTEM OS PARAMETROS DO MÓDULO DA APLICAÇÃO.
 def infoParameters(identity, dateFieldValue=None):
     # parâmetros do arquivo de saída
     nameDf = 'df' + identity + '_parameters_application'

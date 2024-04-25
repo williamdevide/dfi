@@ -5,7 +5,7 @@ from typing import Literal
 import pandas as pd
 
 from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
-from src.script.tools.screenPrint import spLineBoxTaskStatus, spLineBoxError, spLineBoxTaskErrors
+from src.script.tools.screenPrint import spLineBoxTaskStatus, spLineBoxTaskErrors
 
 
 def getCurrentDate():
@@ -48,27 +48,7 @@ def convertAndOrderByData(identity, df, fieldData, formatData):
 
 # Função para unir os DataFrames
 def mergeDataframesByData(identity, df1, df2):
-    # Identificando as colunas comuns aos dois DataFrames
-    common_columns = list(set(df1.columns) & set(df2.columns))
-
     dfTemp = None
-    '''
-    if origin == 'prepareAmbient':
-        if len(df1) > 1:
-            # Mesclando os DataFrames usando as colunas comuns como chave
-            dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="inner")
-        else:
-            # Mesclando os DataFrames usando as colunas comuns como chave
-            dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
-
-    if origin == 'importXlsFinalToDataframe':
-        dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
-
-    if origin == 'importXlsSeriesToDataframe':
-        if totalRecsChargeDestiny > 1:
-            dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="inner")
-        else:
-    '''
     dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
 
     # trecho para outros valores de origin futuros
@@ -120,5 +100,10 @@ def getParameter(dataframeName, parameterName, typeReturn: Literal['Value', 'Dat
     if typeReturn.lower() == 'both':
         return value, dataType
 
+
 def verifyExtensionSQL(string):
     return string[-4:] == '.sql'
+
+
+
+
