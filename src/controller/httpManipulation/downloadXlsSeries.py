@@ -1,7 +1,6 @@
 from src.config.infoFileProducts import infoFileProduct
 from src.config.infoParameters import infoParameters
 from src.controller.httpManipulation.executeDownloadFile import executeDownloadFile
-from src.model.entities.entitySourceProduct import dictionary_source_products
 from src.script.tools.screenPrint import spLineBoxTaskItemWithOutRecords, spLineBoxTaskClose, spLineBoxTaskOpen, spLineBoxTaskErrors, spLineBoxTaskStatus
 
 

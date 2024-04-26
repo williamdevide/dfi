@@ -1,4 +1,3 @@
-import sys
 from datetime import datetime
 from typing import Literal
 
@@ -49,7 +48,8 @@ def convertAndOrderByData(identity, df, fieldData, formatData):
 # Função para unir os DataFrames
 def mergeDataframesByData(identity, df1, df2):
     dfTemp = None
-    dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
+    # dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
+    dfTemp = pd.merge(df1, df2, on=[df1.columns[0], df1.columns[1]], how="outer")
 
     # trecho para outros valores de origin futuros
 
@@ -103,7 +103,3 @@ def getParameter(dataframeName, parameterName, typeReturn: Literal['Value', 'Dat
 
 def verifyExtensionSQL(string):
     return string[-4:] == '.sql'
-
-
-
-

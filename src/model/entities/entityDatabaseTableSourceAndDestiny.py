@@ -39,7 +39,6 @@ class TableSourceAndDestiny:
         self.destinyMerge = destinyMerge
 
 
-
 # Dicionário para armazenar os objetos SourceProduct
 dictionary_tables = {}
 
@@ -55,5 +54,3 @@ def remove_table(program):
         del dictionary_tables[program]
     else:
         print(f"Tabela '{program}' não encontrada no dicionário.")
-
-

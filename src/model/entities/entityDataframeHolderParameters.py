@@ -1,6 +1,5 @@
-import sys
-
 import pandas as pd
+
 
 class DataFrameHolderParameters:
     _instance = None

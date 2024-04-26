@@ -3,11 +3,14 @@ import warnings
 import pandas as pd
 
 from src.config.infoParameters import infoParameters
-from src.script.tools.screenPrint import spLineBoxTaskErrors
+from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskItemWithOutRecords
 
 
 def updateDataframe(identity, dataframeHolder, infoParameter, tables, products):
     try:
+        strMsg = f'Operação: Update dos Dataframes:'
+        spLineBoxTaskItemWithOutRecords(strMsg)
+
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", category=FutureWarning)
 
@@ -52,5 +55,6 @@ def updateDataframe(identity, dataframeHolder, infoParameter, tables, products):
         return True
 
     except Exception as e:
-        spLineBoxTaskErrors('Erro na união dos dataframes:', e)
+        strMsg = f'Update dos dataframes:'
+        spLineBoxTaskErrors(strMsg, str(e))
         return False

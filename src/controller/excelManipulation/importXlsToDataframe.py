@@ -1,34 +1,30 @@
 import pandas as pd
 
 from src.config.infoFile import infoFileDestiny
-from src.config.infoFileProducts import infoFileProduct
 from src.config.infoParameters import infoParameters
-from src.controller.dataframeManipulation.prepareAmbient import prepareAmbient
 from src.controller.dataframeManipulation.fillMissingValues import fillMissingFieldIntervals, fillMissingDayOfWeek, fillMissingFieldFull
+from src.controller.dataframeManipulation.prepareAmbient import prepareAmbient
 from src.controller.dataframeManipulation.unionDataframes import unionDataframes
 from src.controller.dataframeManipulation.updateDataframe import updateDataframe
+from src.controller.excelManipulation.operationsExcel import readFileExcel
 from src.script.tools.screenPrint import spLineBoxTaskRecords, spLineBoxTaskOpen, spLineBoxTaskItemWithOutRecords, spLineBoxTaskItemWithRecords, spLineBoxTaskClose, \
     spLineBoxTaskErrors, spLineBoxTaskStatus
 from src.script.tools.tools import verifySuccess, convertAndOrderByData, mergeDataframesByData
-from src.controller.excelManipulation.operationsExcel import readFileExcel
 
 
-def importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, tables, products):
+def importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, tables, products, typeConnect):
     try:
         spLineBoxTaskOpen('Importando arquivos em série Xlsx para Dataframe principal:')
 
         # Gerando dataframe inicial com todas as datas e dia da semana. Será usado para merge com cada um dos importSeriesProduct
         spLineBoxTaskItemWithOutRecords('Preparando Ambiente:')
-        verifySuccess(prepareAmbient(identity, dataframeHolder, infoParameter, tables, products))
+        verifySuccess(prepareAmbient(identity, dataframeHolder, infoParameter, tables, products, typeConnect))
 
         totalFiles = len(products)
         totalFilesYes = sum(1 for df in products.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
 
         if totalFilesYes < totalFiles:
-            if totalFilesYes == 0:
-                strMsg = f'Informação: Foram encontrados parâmetros para {totalFiles} commodities, mas nenhum será importado.'
-            else:
-                strMsg = f'Informação: Foram encontrados parâmetros para {totalFiles} commodities, mas somente {totalFilesYes} serão importados.'
+            strMsg = f'Informação: Encontrados parâmetros para {totalFiles} arquivo(s) de origem. {totalFilesYes} arquivo(s) a ser importados.'
             spLineBoxTaskItemWithOutRecords(strMsg)
             spLineBoxTaskStatus('')
 
@@ -116,7 +112,7 @@ def executeImportXlsToDataframe(identity, dataframeHolder, product, typeFile):
 
         totalRecords = '[' + str(dfTemp.shape[0]).rjust(6) + ' records]'
         spLineBoxTaskRecords(totalRecords)
-        dataframeHolder.add_df('df'+product.get_item(), dfTemp)
+        dataframeHolder.add_df('df' + product.get_item(), dfTemp)
 
         return True
 

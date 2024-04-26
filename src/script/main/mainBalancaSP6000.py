@@ -3,13 +3,12 @@ import logging
 from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny
 from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
-from src.config.infoFile import infoFileSource, infoFileDestiny
-from src.config.infoFileProducts import infoFileProduct
+from src.config.infoFile import infoFileSource
 from src.config.infoParameters import infoParameters
-from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource
+from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny, selectProfileExportHistory
 from src.model.entities.entityDataframeHolder import DataFrameHolder
 from src.script.tools.screenPrint import spLineBoxError, spLineBoxUp, spLineBoxTitle, spLineBoxText, spLineBoxMiddle, spLineBoxBlank, spHeader, spLineBoxDown, spLineBlank
-from src.script.tools.tools import getParameter, verifySuccess
+from src.script.tools.tools import getParameter
 
 
 def mainBalancaSP6000():
@@ -23,37 +22,16 @@ def mainBalancaSP6000():
 
     # Programa principal
     infoParameter = infoParameters(identity)
-    dataframeHolder = DataFrameHolder()                                                     # Cria o dicionário de DFs
+    dataframeHolder = DataFrameHolder()  # Cria o dicionário de DFs
     infoTables = infoDatabaseTableSourceAndDestiny(identity)
-
-    strInfoSource = ''
-    if infoParameter.tecnologyDatastoreSource == 'Txt':
-        infoFSource = infoFileSource(identity)
-        strInfoSource = 'Local : Arquivo: ' + infoFSource.get_address() + ' : ' + infoFSource.get_name()
-    else:
-        spLineBoxError('Parâmetro encontrado com valor incorreto: Esse módulo aceita somente a origem [Excel]')
-        input()
-
-    strInfoDestiny = ''
-    if infoParameter.tecnologyDatastoreDestiny == 'SQL Server':
-        infoDbDestiny = infoDatabaseDestiny(identity)
-        strInfoDestiny = 'Server:Database: ' + infoDbDestiny.get_address() + ":" + infoDbDestiny.get_databaseName()
-    else:
-        spLineBoxError('Parâmetro encontrado com valor incorreto: Esse módulo aceita somente o destino [SQL Server]')
-        input()
 
     spLineBoxUp()
     spLineBoxTitle('ROTINA [0003-BALANCASP6000] - Importação de dados de pesagem de veículos de carga na Balança SP-6000 para geração de Histórico')
     spLineBoxMiddle()
     spLineBoxText('Data de ínicio de busca:', infoParameter.dateFieldValue)
-    spLineBoxBlank()
-    spLineBoxText('Source Datastore:', infoParameter.tecnologyDatastoreSource)
-    spLineBoxText('Connection =', strInfoSource)
-    spLineBoxBlank()
-    spLineBoxText('Destiny Datastore:', infoParameter.tecnologyDatastoreDestiny)
-    spLineBoxText('Connection =', strInfoDestiny)
+    spLineBoxText('Source Datastore.......:', infoParameter.tecnologyDatastoreSource)
+    spLineBoxText('Destiny Datastore......:', infoParameter.tecnologyDatastoreDestiny)
     spLineBoxMiddle()
-    # spCount()
     spHeader()
     spLineBoxMiddle()
 
@@ -61,25 +39,12 @@ def mainBalancaSP6000():
     spLineBoxMiddle()
     selectProfileImportSource(identity, dataframeHolder, infoParameter, infoTables)
     spLineBoxMiddle()
+    selectProfileExportDestiny(identity, dataframeHolder, infoParameter, infoTables)
+    spLineBoxMiddle()
+    selectProfileExportHistory(identity, dataframeHolder, infoParameter, infoTables)
 
-
-    print('Importar conteudo para dataframe')
-    print('Exportar dados para database')
     print('gravar txt de historico de importação com conteudo do dados.txt')
     print('apagar conteudo do dados.txt')
-
-    '''
-    # verifySuccess(createMainDataframe(identity, dataframeHolder, infoParameter, infoTables))
-    spLineBoxMiddle()
-    verifySuccess(connectFileSource(identity, dataframeHolder, infoParameter, infoTables, infoProduct))
-    spLineBoxMiddle()
-    # verifySuccess(downloadXlsSeries(identity))
-    spLineBoxMiddle()
-    verifySuccess(importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, infoTables, infoProduct))
-    spLineBoxMiddle()
-    selectProfileExportDestiny(identity, dataframeHolder, infoParameter, infoTables)
-    '''
-
 
     spLineBoxMiddle()
     selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)

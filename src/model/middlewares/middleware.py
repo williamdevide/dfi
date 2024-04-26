@@ -2,12 +2,7 @@ import urllib
 from urllib.parse import quote_plus
 
 import pandas as pd
-
-
 from sqlalchemy import create_engine, text
-from sqlalchemy.dialects.postgresql import psycopg2
-
-from src.config.infoDatabase import infoDatabaseDestiny
 
 
 class DatabaseManager:

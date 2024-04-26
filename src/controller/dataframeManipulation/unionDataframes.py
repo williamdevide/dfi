@@ -1,8 +1,11 @@
-from src.script.tools.screenPrint import spLineBoxTaskErrors
+from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskItemWithOutRecords
 
 
 def unionDataframes(identity, dataframeHolder, infoParameter, tables, products):
     try:
+        strMsg = f'Operação: União dos Dataframes:'
+        spLineBoxTaskItemWithOutRecords(strMsg)
+
         dfUnion = dataframeHolder.concat_dfs(start_index=3)  # Concatena os dataframes a partir do índice 3
 
         # Dataframe principal recebe os dados do dataframe local
@@ -10,5 +13,6 @@ def unionDataframes(identity, dataframeHolder, infoParameter, tables, products):
 
         return True
     except Exception as e:
-        spLineBoxTaskErrors('Erro na união dos dataframes:', e)
+        strMsg = f'União dos dataframes:'
+        spLineBoxTaskErrors(strMsg, str(e))
         return False

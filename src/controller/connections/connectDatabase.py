@@ -1,13 +1,12 @@
-import sys
 from src.controller.databaseController.controllerDB import DataController
-from src.script.tools.screenPrint import spLineBoxTaskUnique, spLineBoxTaskErrors, spLineBoxTaskItemWithRecords, spLineBoxTaskClose, spLineBoxTaskOpen, \
+from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskClose, spLineBoxTaskOpen, \
     spLineBoxTaskItemWithOutRecords
 from src.script.tools.tools import verifyExtensionSQL, verifySuccess
 
 
 def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, typeConnect):
     try:
-        strMsg = 'Conexão com database(s) e tabela(s) de ' + typeConnect + ':'
+        strMsg = f'Conexão com {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}]:'
         spLineBoxTaskOpen(strMsg)
         # Instanciando o controlador de dados
         data_controller = DataController(identity, infoDb)
@@ -17,7 +16,7 @@ def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, ty
 
         # Verifica se é possível a conexão com o banco de dados
         if not data_controller.verify_connection():
-            strMsg = 'Erro ao conectar ao database de ' + typeConnect
+            strMsg = f'Conexão com {typeConnect}: Erro ao conectar'
             spLineBoxTaskErrors(strMsg)
             input()
 
@@ -32,7 +31,7 @@ def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, ty
             if typeConnect == 'Destino':
                 tableName = table.get_destiny()
 
-            strMsg = 'Connecting..[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Tabela:[' + tableName + ']: '
+            strMsg = 'Conectando..[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Tabela:[' + tableName + ']: '
 
             spLineBoxTaskItemWithOutRecords(strMsg)
 
@@ -43,7 +42,7 @@ def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, ty
             else:
                 verifySuccess(True)
 
-        strMsg = f'Final do conexão com database(s) e tabela(s) de {typeConnect}:'
+        strMsg = f'Conexão com {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}]:'
         spLineBoxTaskClose(strMsg)
 
         # Fecha a conexão com o banco de dados
@@ -53,6 +52,6 @@ def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, ty
         return True
 
     except Exception as e:
-        strMsg = 'Erro ao conectar ao database de ' + typeConnect + ': '
+        strMsg = f'Conexão com {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}]:'
         spLineBoxTaskErrors(strMsg, str(e))
         return None

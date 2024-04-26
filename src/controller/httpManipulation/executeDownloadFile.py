@@ -20,4 +20,3 @@ def executeDownloadFile(identity, product, url, fileName, saveLocation, headersB
             print(f' -> O download do arquivo {fileName} falhou. Código de status: {response.status_code}')
     except Exception as e:
         print(f' -> Ocorreu um erro durante o download do arquivo: {str(e)}')
-

@@ -1,4 +1,3 @@
-import sys
 from datetime import datetime
 
 import pandas as pd
@@ -23,7 +22,7 @@ def readFileExcel(identity, dataframeHolder, product, typeFile):
     SAPProduct = product.get_SAPProduct()
 
     # Monta o caminho completo do arquivo
-    absolutePath = address + product.get_name()
+    absolutePath = address + file
 
     if typeFile == 'Origem':
         info = infoParameters(identity)
@@ -46,7 +45,7 @@ def readFileExcel(identity, dataframeHolder, product, typeFile):
 
             # Criando a coluna
             df[info.dateField] = pd.to_datetime(df['Ano'].astype(str) + df['Mês'].map(month_map).astype(str).str.zfill(2) + '01',
-                                        format='%Y%m%d').dt.strftime('%d/%m/%Y')
+                                                format='%Y%m%d').dt.strftime('%d/%m/%Y')
             df.insert(2, info.dateField, df.pop(info.dateField))
 
             # Elimina as colunas Ano e Mês
@@ -82,7 +81,7 @@ def readFileExcel(identity, dataframeHolder, product, typeFile):
         df.loc[:, info.structureFieldsDataframeSource[0]] = pd.to_datetime(df[df.columns[0]], dayfirst=True).dt.strftime('%d/%m/%Y')
 
 
-    else:   # Destino
+    else:  # Destino
         returnVerifyFile = verifyFile(file, address)
         if returnVerifyFile == 1:
             dfRead = pd.ExcelFile(absolutePath).parse(sheet_name=sheet, header=header - 1)

@@ -1,10 +1,10 @@
 import logging
 from datetime import datetime
 
-from src.script.main.mainBalancaSP6000 import mainBalancaSP6000
-from src.script.tools.tools import getParameter
-from src.script.main.mainCommodities import mainCommodities
 from src.script.main.mainAvacorp import mainAvacorp
+from src.script.main.mainBalancaSP6000 import mainBalancaSP6000
+from src.script.main.mainCommodities import mainCommodities
+from src.script.tools.tools import getParameter
 
 
 def main():

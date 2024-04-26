@@ -1,11 +1,11 @@
 import os
-from datetime import datetime
-
-import pandas as pd
 import re
 
-from src.script.tools.tools import verifyFile
+import pandas as pd
+
 from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
+from src.script.tools.tools import verifyFile
+
 
 def _readParameterIni(file_path):
     dataframeHolderParameters = DataFrameHolderParameters()
@@ -27,11 +27,11 @@ def _readParameterIni(file_path):
             if char == '[':
                 if nested_level == 0:
                     nested_level += 1
-                    sub_value_str = value_str[value_str.find('['):value_str.find(']')+1]
+                    sub_value_str = value_str[value_str.find('['):value_str.find(']') + 1]
                     current_item = parse_list(sub_value_str)
                     idx += (len(sub_value_str) - 1)
                     nested_level -= 1
-                    x= 2
+                    x = 2
                     continue
                 nested_level += 1
             elif char == ']':
@@ -154,7 +154,7 @@ def _readParameterIni(file_path):
     else:
         print("Error: File not found.")
 
-    x=1
+    x = 1
     # return dataframeHolderParameters
 
 
@@ -164,7 +164,8 @@ def _validateParameters(dataframeHolderParameters, valid_params_df):
         for param, row in df.iterrows():
             filled = not pd.isna(row['Value'])
             valid = param in valid_params_df.index
-            result_df = result_df.append({'Block': block, 'Parameter': param, 'Value': row['Value'], 'DataType': row['DataType'], 'Filled': filled, 'Valid': valid}, ignore_index=True)
+            result_df = result_df.append({'Block': block, 'Parameter': param, 'Value': row['Value'], 'DataType': row['DataType'], 'Filled': filled, 'Valid': valid},
+                                         ignore_index=True)
     return result_df
 
 
@@ -197,4 +198,3 @@ def chargeParameters():
     result_df = compare_with_valid_parameters(dataframeHolderParameters, valid_params_df)
     print(result_df)
     '''
-

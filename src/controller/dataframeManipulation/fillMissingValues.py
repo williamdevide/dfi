@@ -1,5 +1,6 @@
 # Chamada para o preenchimento dos valores nas datas vazias
 import pandas as pd
+
 from src.script.tools.tools import getColumnIndex, getWeekdayName
 
 

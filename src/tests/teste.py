@@ -1,6 +1,6 @@
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 # Defina as datas iniciais e finais
 dataIni = "2024-01-01"

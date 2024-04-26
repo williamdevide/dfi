@@ -1,8 +1,8 @@
 import logging
 
+from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny, infoDatabaseSource
-from src.config import infoDatabase, infoDatabaseTables
-from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, removeDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
+from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFileProducts import infoFileProduct
 from src.config.infoParameters import infoParameters
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny
@@ -27,34 +27,13 @@ def mainAvacorp():
     infoTables = infoDatabaseTableSourceAndDestiny(identity)
     infoProduct = infoFileProduct(identity)
 
-    strInfoSource = ''
-    if infoParameter.tecnologyDatastoreSource == 'PostgreSQL':
-        infoDbSource = infoDatabaseSource(identity)
-        strInfoSource = 'Server:Database: ' + infoDbSource.get_address() + ":" + infoDbSource.get_databaseName()
-    else:
-        spLineBoxError('Parâmetro encontrado com valor incorreto: Esse módulo aceita somente a origem [PostgreSQL]')
-        input()
-
-    strInfoDestiny = ''
-    if infoParameter.tecnologyDatastoreDestiny == 'SQL Server':
-        infoDbDestiny = infoDatabaseDestiny(identity)
-        strInfoDestiny = 'Server:Database: ' + infoDbDestiny.get_address() + ":" + infoDbDestiny.get_databaseName()
-    else:
-        spLineBoxError('Parâmetro encontrado com valor incorreto: Esse módulo aceita somente o destino [SQL Server]')
-        input()
-
     spLineBoxUp()
     spLineBoxTitle('ROTINA [0002-AVACORP] - Importação de dados do Avacorp')
     spLineBoxMiddle()
     spLineBoxText('Data de ínicio de busca:', infoParameter.dateFieldValue)
-    spLineBoxBlank()
-    spLineBoxText('Source Datastore:', infoParameter.tecnologyDatastoreSource)
-    spLineBoxText('Connection =', strInfoSource)
-    spLineBoxBlank()
-    spLineBoxText('Destiny Datastore:', infoParameter.tecnologyDatastoreDestiny)
-    spLineBoxText('Connection =', strInfoDestiny)
+    spLineBoxText('Source Datastore.......:', infoParameter.tecnologyDatastoreSource)
+    spLineBoxText('Destiny Datastore......:', infoParameter.tecnologyDatastoreDestiny)
     spLineBoxMiddle()
-    # spCount()
     spHeader()
     spLineBoxMiddle()
 

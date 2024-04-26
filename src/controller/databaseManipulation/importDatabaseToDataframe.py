@@ -1,19 +1,14 @@
 import pandas as pd
 
-from src.config.infoDatabase import infoDatabaseDestiny, infoDatabaseSource
 from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny
-from src.config.infoFile import infoFileDestiny, infoFileSource
-from src.config.infoParameters import infoParameters
 from src.controller.databaseManipulation.operationsDB import readTableSQL
-from src.controller.dataframeManipulation.fillMissingValues import fillMissingFieldIntervals, fillMissingDayOfWeek, fillMissingFieldFull
-from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, spLineBoxTaskItemWithRecords, spLineBoxTaskRecords, spLineBoxTaskErrors, \
-    spLineBoxTaskItemWithOutRecords
-from src.script.tools.tools import verifySuccess, convertAndOrderByData, mergeDataframesByData
+from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, spLineBoxTaskItemWithRecords, spLineBoxTaskRecords, spLineBoxTaskErrors
+from src.script.tools.tools import verifySuccess
 
 
 def importDatabaseToDataframe(identity, dataframeHolder, infoParameter, infoDb, tables, typeConnect):
     try:
-        strMsg = f'Carregando informações do(s) database(s) de {typeConnect} para Dataframe principal.'
+        strMsg = f'Importando dados do {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}] para Dataframe principal:'
         spLineBoxTaskOpen(strMsg)
         infoTables = infoDatabaseTableSourceAndDestiny(identity)
 
@@ -28,14 +23,14 @@ def importDatabaseToDataframe(identity, dataframeHolder, infoParameter, infoDb, 
             if typeConnect == 'Destino':
                 tableName = table.get_destiny()
 
-            strMsg = 'Connecting..[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Tabela:[' + tableName + ']: '
+            strMsg = 'Importando...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Tabela:[' + tableName + ']: '
 
             spLineBoxTaskItemWithRecords(strMsg)
 
             # Realiza a chamada para importação do database para o dataframe
             verifySuccess(executeImportDatabaseToDataframe(identity, dataframeHolder, infoParameter, infoDb, table, typeConnect))
 
-        strMsg = f'Final do carregamento das informações do(s) database(s) de {typeConnect} para Dataframe principal:'
+        strMsg = f'Importando dados do {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}] para Dataframe principal:'
         spLineBoxTaskClose(strMsg)
         return True
 
@@ -71,7 +66,8 @@ def executeImportDatabaseToDataframe(identity, dataframeHolder, infoParameter, i
 
             if typeConnect == 'Destino':
                 # condições para dftemp de destino sem conteudo
-                dfTemp = pd.DataFrame()
+                # dfTemp = pd.DataFrame()
+                dfTemp = pd.DataFrame(columns=infoParameter.structureFieldsDataframeSource)
 
         totalRecords = '[' + str(dfTemp.shape[0]).rjust(6) + ' records]'
         spLineBoxTaskRecords(totalRecords)
