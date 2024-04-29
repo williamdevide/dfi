@@ -45,7 +45,6 @@ def infoDatabaseSource(identity):
         password = getParameter(nameDf, 'password')
         port = getParameter(nameDf, 'port')
         driver = getParameter(nameDf, 'driver')
-        # stringConnection = f"DRIVER={{{driver}}};SERVER={address};PORT={port};DATABASE={databaseName};UID={username};PWD={password}"
         stringConnection = f"Driver={{{driver}}}; Server={address}; Port={port}; Database={databaseName}; Uid={username}; Pwd={password}"
 
         # Cria a instância de DatabaseDestinyInfo com as informações fornecidas

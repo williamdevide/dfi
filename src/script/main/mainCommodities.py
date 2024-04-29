@@ -4,11 +4,12 @@ from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny
 from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileDestiny, infoFileSource
-from src.config.infoFileProducts import infoFileProduct
-from src.config.infoParameters import infoParameters
+from src.config.infoFileProducts import infoFileProduct, clearInformationProduct
+from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.connections.connectFile import connectFile
 from src.controller.dataframeManipulation.createMainDataframe import createMainDataframe
 from src.controller.excelManipulation.importXlsToDataframe import importXlsSeriesToDataframe
+from src.controller.httpManipulation.downloadXlsSeries import downloadXlsSeries
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileExportDestiny
 from src.model.entities.entityDataframeHolder import DataFrameHolder
 from src.script.tools.screenPrint import spLineBoxUp, spLineBoxTitle, spLineBoxDown, spLineBoxMiddle, spLineBoxText, spLineBoxBlank, spLineBlank, spHeader, \
@@ -26,7 +27,7 @@ def mainCommodities():
     infoDatabase.dbDestiny = None
 
     # Programa principal
-    infoParameter = infoParameters(identity)
+    infoParameter = infoParametersApplication(identity)
     dataframeHolder = DataFrameHolder()  # Cria o dicionário de DFs
     infoTables = infoDatabaseTableSourceAndDestiny(identity)
     infoProduct = infoFileProduct(identity)
@@ -61,6 +62,7 @@ def mainCommodities():
     spLineBoxDown()
     spLineBlank()
 
+    clearInformationProduct(infoProduct)
     clearDatabaseTableSourceAndDestiny(infoTables)
 
     # Registrando a conclusão da execução no log

@@ -117,3 +117,10 @@ dictionary_source_products = {}
 # Função para adicionar um novo SourceProduct ao dicionário
 def add_source_product(product_name, source_product):
     dictionary_source_products[product_name] = source_product
+
+def remove_table(program):
+    """Remove uma tabela do dicionário."""
+    if program in dictionary_source_products:
+        del dictionary_source_products[program]
+    else:
+        print(f"Tabela '{program}' não encontrada no dicionário.")

@@ -1,7 +1,7 @@
 import pandas as pd
 
 from src.config.infoFile import infoFileDestiny
-from src.config.infoParameters import infoParameters
+from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.dataframeManipulation.fillMissingValues import fillMissingFieldIntervals, fillMissingDayOfWeek, fillMissingFieldFull
 from src.controller.dataframeManipulation.prepareAmbient import prepareAmbient
 from src.controller.dataframeManipulation.unionDataframes import unionDataframes
@@ -9,12 +9,13 @@ from src.controller.dataframeManipulation.updateDataframe import updateDataframe
 from src.controller.excelManipulation.operationsExcel import readFileExcel
 from src.script.tools.screenPrint import spLineBoxTaskRecords, spLineBoxTaskOpen, spLineBoxTaskItemWithOutRecords, spLineBoxTaskItemWithRecords, spLineBoxTaskClose, \
     spLineBoxTaskErrors, spLineBoxTaskStatus
-from src.script.tools.tools import verifySuccess, convertAndOrderByData, mergeDataframesByData
+from src.script.tools.tools import verifySuccess, convertAndOrderByData, mergeDataframesOuter, mergeDataframesInner
 
 
 def importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, tables, products, typeConnect):
     try:
-        spLineBoxTaskOpen('Importando arquivos em série Xlsx para Dataframe principal:')
+        strMsg = 'Importação de arquivos em série Xlsx para Dataframe principal:'
+        spLineBoxTaskOpen(strMsg)
 
         # Gerando dataframe inicial com todas as datas e dia da semana. Será usado para merge com cada um dos importSeriesProduct
         spLineBoxTaskItemWithOutRecords('Preparando Ambiente:')
@@ -43,18 +44,18 @@ def importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, tables,
                         verifySuccess(executeImportXlsToDataframe(identity, dataframeHolder, product, 'Origem'))
 
             # Gerando dataframe final com a união dos dataframes de produtos
-            spLineBoxTaskItemWithOutRecords('Unindo Dataframes:')
             verifySuccess(unionDataframes(identity, dataframeHolder, infoParameter, tables, products))
 
             # Atualizando dfChargeDestiny com os valores do dfUnion
-            spLineBoxTaskItemWithOutRecords('Atualizando Dataframe inicial:')
             verifySuccess(updateDataframe(identity, dataframeHolder, infoParameter, tables, products))
 
-        spLineBoxTaskClose('Final da importação dos arquivos em série Xlsx para Dataframe principal:')
+        strMsg = 'Importação de arquivos em série Xlsx para Dataframe principal:'
+        spLineBoxTaskClose(strMsg)
         return True
 
     except Exception as e:
-        spLineBoxTaskErrors('Erro ao importar informações dos arquivos em série:', str(e))
+        strMsg = 'Importação de arquivos em série Xlsx para Dataframe principal:'
+        spLineBoxTaskErrors(strMsg, str(e))
         return False
 
 
@@ -89,7 +90,7 @@ def executeImportXlsToDataframe(identity, dataframeHolder, product, typeFile):
 
         # verifica se existe conteudo. se existir conteudo ordena e mescla com o dfMain criando o df[productName]]
         if not dfTemp.empty:
-            info = infoParameters(identity)
+            info = infoParametersApplication(identity)
 
             if typeFile == 'Origem':
                 # Ordenar DataFrame pela coluna 'Data'
@@ -98,7 +99,7 @@ def executeImportXlsToDataframe(identity, dataframeHolder, product, typeFile):
 
                 # Dataframe principal recebe os dados do dataframe local
                 dfAmbient = dataframeHolder.get_df('dfAmbient')
-                dfTemp = mergeDataframesByData(identity, dfAmbient, dfTemp)
+                dfTemp = mergeDataframesInner(identity, dfAmbient, dfTemp)
                 dfTemp = fillMissingFieldIntervals(identity, dfTemp, info.priceField)
                 dfTemp = fillMissingFieldIntervals(identity, dfTemp, 'comhis_price_unit')
                 dfTemp = fillMissingFieldFull(identity, dfTemp, 'comhis_conversion_factor', product.get_conversionFactor())

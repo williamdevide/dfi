@@ -4,7 +4,7 @@ from datetime import datetime
 import pandas as pd
 
 from src.script.tools.screenPrint import spLineBoxTaskErrors
-from src.script.tools.tools import getCurrentDate, getWeekdayName, convertAndOrderByData, mergeDataframesByData
+from src.script.tools.tools import getCurrentDate, getWeekdayName, convertAndOrderByData, mergeDataframesOuter
 
 
 def prepareAmbient(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect):
@@ -33,10 +33,6 @@ def prepareAmbient(identity, dataframeHolder, infoParameter, infoTables, infoPro
             # Ordenar DataFrame pela coluna 'Data'
             df = convertAndOrderByData(identity, df, infoParameter.dateField, infoParameter.dateFieldFormat)
 
-            # Dataframe principal recebe os dados do dataframe local
-            dfMain = dataframeHolder.get_df('dfMain')
-            dfTemp = mergeDataframesByData(identity, dfMain, df)
-
         elif identity == 'balancasp6000':
             df = pd.DataFrame(columns=infoParameter.structureFieldsDataframeSource)
 
@@ -45,7 +41,7 @@ def prepareAmbient(identity, dataframeHolder, infoParameter, infoTables, infoPro
 
         # Dataframe principal recebe os dados do dataframe local
         dfMain = dataframeHolder.get_df('dfMain')
-        dfTemp = mergeDataframesByData(identity, dfMain, df)
+        dfTemp = mergeDataframesOuter(identity, dfMain, df)
         dataframeHolder.add_df('dfAmbient', dfTemp)
 
         return True

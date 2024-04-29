@@ -3,8 +3,9 @@ from datetime import datetime
 
 import pandas as pd
 
+from src.config.infoFileProducts import infoFileProduct
 from src.script.tools.screenPrint import spLineBoxTaskErrors
-from src.script.tools.tools import getParameter, verifyFile
+from src.script.tools.tools import getParameter, verifyFile, deleteLinesTxt
 
 
 def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
@@ -18,7 +19,10 @@ def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, type
         dfRead = pd.DataFrame(columns=infoParameter.structureFieldsDataframeSource)
 
         # Lê o arquivo e a armazena em um DataFrame
-        df = pd.read_csv(absolutePath, sep='|', header=None)
+        if os.path.exists(absolutePath) and os.path.getsize(absolutePath) > 0:
+            df = pd.read_csv(absolutePath, sep='|', header=None)
+        else:
+            df = pd.DataFrame(dfRead)
 
         # Montando df com a mesma estrutura do infoParameters
         dfRead = structureTxtDataframe(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect, dfRead, df)
@@ -33,6 +37,17 @@ def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, type
 
 
 def writeFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
+
+    address = ''
+    file = ''
+
+    dataframe = dataframeHolder.get_df('df' + item.get_programName())
+    if isinstance(dataframe, pd.DataFrame):
+        if dataframe.empty:
+            dataframe = dataframeHolder.get_df('df' + item.get_programName() + '_Destiny')
+    else:
+        dataframe = dataframeHolder.get_df('df' + item.get_programName() + '_Destiny')
+
     if typeConnect == 'Histórico':
         installationPath = getParameter('dfglobal_parameters_application', 'installationPath')
         # Criando a subpasta 'arquivos-historico' se ainda não existir
@@ -45,11 +60,13 @@ def writeFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typ
         address = os.path.join(installationPath, 'arquivos-historico', identity)
         file = datetime.now().strftime(f'dfi_{identity}_log-%Y-%m-%d.log')
 
+        clearTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect)
 
-    # destinyDf = dataframe
+    destinyDf = dataframe
 
     # Monta o caminho completo do arquivo
-    absolutePath = address + file
+    # noinspection PyTypeChecker
+    absolutePath = os.path.join(address, file)
 
     # Verifica se o arquivo existe e é acessível
     returnVerifyFile = verifyFile(file, address)
@@ -58,7 +75,7 @@ def writeFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typ
         input()
 
     # Grava o DataFrame em um novo arquivo Excel
-    # destinyDf.to_csv(absolutePath, sheet_name=sheet, index=False)
+    destinyDf.to_csv(absolutePath, sep='|', header=None, index=False)
 
     return True
 
@@ -100,3 +117,36 @@ def structureTxtDataframe(identity, dataframeHolder, infoParameter, infoTables, 
         spLineBoxTaskErrors(strMsg)
 
     return dfRead
+
+
+def clearTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
+    address = ''
+    file = ''
+
+    dataframe = dataframeHolder.get_df('df' + item.get_programName())
+    if isinstance(dataframe, pd.DataFrame):
+        if dataframe.empty:
+            dataframe = dataframeHolder.get_df('df' + item.get_programName() + '_Destiny')
+    else:
+        dataframe = dataframeHolder.get_df('df' + item.get_programName() + '_Destiny')
+
+    if typeConnect == 'Histórico':
+        infoProduct = infoFileProduct(identity)
+        for index, (item_name, item) in enumerate(infoProduct.items(), start=1):
+            address = item.get_address()
+            file = item.get_name()
+
+    destinyDf = dataframe
+
+    # Monta o caminho completo do arquivo
+    # noinspection PyTypeChecker
+    absolutePath = os.path.join(address, file)
+
+    # Verifica se o arquivo existe e é acessível
+    returnVerifyFile = verifyFile(file, address)
+    if returnVerifyFile == 2:
+        print(" -> Erro")
+        input()
+
+    # deleta as linhas já existentes
+    deleteLinesTxt(destinyDf, absolutePath)

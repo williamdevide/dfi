@@ -31,8 +31,8 @@ class DataFrameHolder:
         dfs_to_concat = []
         for nome in list(self._dfs.keys())[start_index:]:
             df = self._dfs[nome]
-            if not df.empty:
-                dfs_to_concat.append(df)
+            # if not df.empty:
+            dfs_to_concat.append(df)
         if dfs_to_concat:
             return pd.concat(dfs_to_concat, ignore_index=True)
         else:

@@ -1,4 +1,4 @@
-from src.model.entities.entityDatabaseTableSourceAndDestiny import TableSourceAndDestiny, dictionary_tables, add_table, remove_table
+from src.model.entities.entityOperations import TableSourceAndDestiny, dictionary_tables, add_table, remove_table
 from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
 from src.script.tools.tools import getParameter
 

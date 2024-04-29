@@ -4,7 +4,7 @@ from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny
 from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileSource
-from src.config.infoParameters import infoParameters
+from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny, selectProfileExportHistory
 from src.model.entities.entityDataframeHolder import DataFrameHolder
 from src.script.tools.screenPrint import spLineBoxError, spLineBoxUp, spLineBoxTitle, spLineBoxText, spLineBoxMiddle, spLineBoxBlank, spHeader, spLineBoxDown, spLineBlank
@@ -21,7 +21,7 @@ def mainBalancaSP6000():
     infoDatabase.dbDestiny = None
 
     # Programa principal
-    infoParameter = infoParameters(identity)
+    infoParameter = infoParametersApplication(identity)
     dataframeHolder = DataFrameHolder()  # Cria o dicionário de DFs
     infoTables = infoDatabaseTableSourceAndDestiny(identity)
 
@@ -42,10 +42,6 @@ def mainBalancaSP6000():
     selectProfileExportDestiny(identity, dataframeHolder, infoParameter, infoTables)
     spLineBoxMiddle()
     selectProfileExportHistory(identity, dataframeHolder, infoParameter, infoTables)
-
-    print('gravar txt de historico de importação com conteudo do dados.txt')
-    print('apagar conteudo do dados.txt')
-
     spLineBoxMiddle()
     selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)
     spLineBoxDown()
@@ -54,6 +50,7 @@ def mainBalancaSP6000():
     spLineBoxTitle('Final do processo de importação de dados de dados de pesagem de veículos de carga na Balança SP-6000 para geração de Histórico')
     spLineBoxDown()
     spLineBlank()
+
 
     clearDatabaseTableSourceAndDestiny(infoTables)
 

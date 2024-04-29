@@ -1,5 +1,5 @@
 from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
-from src.model.entities.entitySourceProduct import SourceProduct, add_source_product, dictionary_source_products
+from src.model.entities.entitySourceData import SourceProduct, add_source_product, dictionary_source_products, remove_table
 from src.script.tools.tools import getParameter
 
 
@@ -37,3 +37,11 @@ def addInformationProduct(identity, product):
 
     return SourceProduct(importar, importMethod, item, name, url, address, sheet, header, columns, conditionColumns, conditionValue, conversionFactor, unitSource, unitDestiny,
                          SAPProduct)
+
+def clearInformationProduct(infoTables):
+    indexTable = []
+    for index, (program, table) in enumerate(infoTables.items(), start=1):
+        indexTable.append(program)
+
+    for indexTable in indexTable:
+        remove_table(indexTable)

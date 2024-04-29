@@ -45,13 +45,20 @@ def convertAndOrderByData(identity, df, fieldData, formatData):
     return df
 
 
+def mergeDataframesInner(identity, df1, df2):
+    dfTemp = None
+    # dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
+    dfTemp = pd.merge(df1, df2, on=[df1.columns[0], df1.columns[1]], how="inner")
+    # dfTemp = pd.merge(df1, df2, how = 'outer', on = list(df1.columns))
+
+    return dfTemp
+
 # Função para unir os DataFrames
-def mergeDataframesByData(identity, df1, df2):
+def mergeDataframesOuter(identity, df1, df2):
     dfTemp = None
     # dfTemp = pd.merge(df1, df2, on=['comhis_date', 'comhis_day_week'], how="outer")
     dfTemp = pd.merge(df1, df2, on=[df1.columns[0], df1.columns[1]], how="outer")
-
-    # trecho para outros valores de origin futuros
+    # dfTemp = pd.merge(df1, df2, how = 'outer', on = list(df1.columns))
 
     return dfTemp
 
@@ -103,3 +110,26 @@ def getParameter(dataframeName, parameterName, typeReturn: Literal['Value', 'Dat
 
 def verifyExtensionSQL(string):
     return string[-4:] == '.sql'
+
+
+def deleteLinesTxt(df, file):
+    # Ler o conteúdo do arquivo e armazenar as linhas em uma lista
+    with open(file, 'r') as f:
+        lines = f.readlines()
+
+    # Inicializar uma lista para armazenar as linhas a serem mantidas
+    linesMaintained = []
+
+    # Iterar sobre as linhas do arquivo
+    for line in lines:
+        # Dividir a linha em campos usando '|' como separador
+        fields = line.strip().split('|')
+
+        # Verificar se a placa, data e hora da linha existem no DataFrame
+        if fields[0] not in df['sp6000_placa'].values and fields[15] not in df['sp6000_final_data'].values and fields[16] not in df['sp6000_final_hora'].values:
+            # Se não existirem no DataFrame, adicionar a linha à lista de linhas a serem mantidas
+            linesMaintained.append(line)
+
+    # Escrever as linhas mantidas de volta no arquivo, substituindo o conteúdo original
+    with open(file, 'w') as f:
+        f.writelines(linesMaintained)

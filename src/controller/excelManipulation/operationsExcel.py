@@ -3,7 +3,7 @@ from datetime import datetime
 import pandas as pd
 import win32com.client as win32
 
-from src.config.infoParameters import infoParameters
+from src.config.infoParametersApplication import infoParametersApplication
 from src.script.tools.tools import verifyFile
 
 
@@ -25,7 +25,7 @@ def readFileExcel(identity, dataframeHolder, product, typeFile):
     absolutePath = address + file
 
     if typeFile == 'Origem':
-        info = infoParameters(identity)
+        info = infoParametersApplication(identity)
 
         # criando df com estrutura do infoParameters
         dfRead = pd.DataFrame(columns=info.structureFieldsDataframeSource)

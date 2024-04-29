@@ -63,9 +63,12 @@ def writeTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeC
         spLineBoxTaskErrors(strMsg)
         input()
 
-    dataframe = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
-    if dataframe.empty:
-        dataframe = dataframeHolder.get_df('df' + table.get_programName())
+    dataframe = dataframeHolder.get_df('df' + table.get_programName())
+    if isinstance(dataframe, pd.DataFrame):
+        if dataframe.empty:
+            dataframe = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
+    else:
+        dataframe = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
 
     # Gravando dataframe na tabela de destino
     if table.get_destinyTemp() != '':

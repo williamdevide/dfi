@@ -1,5 +1,5 @@
 from src.config.infoFileProducts import infoFileProduct
-from src.config.infoParameters import infoParameters
+from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.httpManipulation.executeDownloadFile import executeDownloadFile
 from src.script.tools.screenPrint import spLineBoxTaskItemWithOutRecords, spLineBoxTaskClose, spLineBoxTaskOpen, spLineBoxTaskErrors, spLineBoxTaskStatus
 
@@ -8,7 +8,7 @@ from src.script.tools.screenPrint import spLineBoxTaskItemWithOutRecords, spLine
 def downloadXlsSeries(identity):
     try:
         spLineBoxTaskOpen('Download de arquivos de Séries xls.')
-        info = infoParameters(identity)
+        info = infoParametersApplication(identity)
         infoProduct = infoFileProduct(identity)
 
         totalFiles = len(infoProduct)

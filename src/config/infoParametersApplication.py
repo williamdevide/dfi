@@ -5,7 +5,7 @@ from src.script.tools.tools import getWeekdayName, getParameter
 
 
 # CONTEM OS PARAMETROS DO MÓDULO DA APLICAÇÃO.
-def infoParameters(identity, dateFieldValue=None):
+def infoParametersApplication(identity, dateFieldValue=None):
     # parâmetros do arquivo de saída
     nameDf = 'df' + identity + '_parameters_application'
 
@@ -25,5 +25,4 @@ def infoParameters(identity, dateFieldValue=None):
 
     # Retorna um objeto DatabaseDestinyInfo com as informações fornecidas
     return ParametersApplication(tecnologyDatastoreSource, tecnologyDatastoreDestiny, structureFieldsDataframeSource, dateField, dateFieldValueDefault, dateFieldValue,
-                                 dateFieldFormat,
-                                 dayWeekField, dayWeekFieldValue, priceField, headersBrowser, singleSourceTransferency, singleDestinyTransferency)
+                                 dateFieldFormat, dayWeekField, dayWeekFieldValue, priceField, headersBrowser, singleSourceTransferency, singleDestinyTransferency)
