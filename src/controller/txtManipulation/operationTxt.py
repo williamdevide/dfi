@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pandas as pd
 
-from src.config.infoFileProducts import infoFileProduct
+from src.config.infoFileProducts import infoDataItem
 from src.script.tools.screenPrint import spLineBoxTaskErrors
 from src.script.tools.tools import getParameter, verifyFile, deleteLinesTxt
 
@@ -11,7 +11,7 @@ from src.script.tools.tools import getParameter, verifyFile, deleteLinesTxt
 def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
 
     # Monta o caminho completo do arquivo
-    absolutePath = item.get_address() + item.get_name()
+    absolutePath = item.get_addressDestiny() + item.get_filename()
 
     if typeConnect == 'Origem':
 
@@ -131,10 +131,10 @@ def clearTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeCon
         dataframe = dataframeHolder.get_df('df' + item.get_programName() + '_Destiny')
 
     if typeConnect == 'Histórico':
-        infoProduct = infoFileProduct(identity)
+        infoProduct = infoDataItem(identity)
         for index, (item_name, item) in enumerate(infoProduct.items(), start=1):
-            address = item.get_address()
-            file = item.get_name()
+            address = item.get_addressDestiny()
+            file = item.get_filename()
 
     destinyDf = dataframe
 

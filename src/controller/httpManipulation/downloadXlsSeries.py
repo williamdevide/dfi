@@ -1,4 +1,4 @@
-from src.config.infoFileProducts import infoFileProduct
+from src.config.infoFileProducts import infoDataItem
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.httpManipulation.executeDownloadFile import executeDownloadFile
 from src.script.tools.screenPrint import spLineBoxTaskItemWithOutRecords, spLineBoxTaskClose, spLineBoxTaskOpen, spLineBoxTaskErrors, spLineBoxTaskStatus
@@ -9,7 +9,7 @@ def downloadXlsSeries(identity):
     try:
         spLineBoxTaskOpen('Download de arquivos de Séries xls.')
         info = infoParametersApplication(identity)
-        infoProduct = infoFileProduct(identity)
+        infoProduct = infoDataItem(identity)
 
         totalFiles = len(infoProduct)
         totalFilesYes = sum(1 for df in infoProduct.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
@@ -35,7 +35,7 @@ def downloadXlsSeries(identity):
 
                     if product.get_importMethod() == 'Download-xls':
                         # Chamada para realização do download
-                        executeDownloadFile(identity, product_name, product.get_url(), product.get_name(), product.get_address(), info.headersBrowser)
+                        executeDownloadFile(identity, product_name, product.get_addressSource(), product.get_name(), product.get_addressDestiny(), info.headersBrowser)
 
         spLineBoxTaskClose('Download de arquivos de Séries xls concluído:')
         # Retorna True

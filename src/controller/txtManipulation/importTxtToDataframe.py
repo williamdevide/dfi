@@ -32,9 +32,9 @@ def importTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, i
 
                     fileName = ''
                     if typeConnect == 'Origem':
-                        fileName = item.get_url() + item.get_name()
+                        fileName = item.get_addressSource() + item.get_filename()
                     if typeConnect == 'Destino':
-                        fileName = item.get_address() + item.get_name()
+                        fileName = item.get_addressDestiny() + item.get_filename()
 
                     # Exibindo o número do índice e o número total de produtos
                     strMsg = 'Coletando...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Arquivo:[' + fileName + ']:'

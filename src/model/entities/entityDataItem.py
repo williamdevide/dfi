@@ -1,12 +1,12 @@
-class SourceProduct:
-    def __init__(self, importar: str, importMethod: str, item: str, name: str, url: str, address: str, sheet: str, header: int,
+class DataItem:
+    def __init__(self, importar: str, importMethod: str, item: str, filename: str, addressSource: str, addressDestiny: str, sheet: str, header: int,
                  columns: list[str], conditionColumns: str, conditionValue: str, conversionFactor: float, unitSource: str, unitDestiny: str, SAPProduct: str):
         self.__importar = importar
         self.__importMethod = importMethod
         self.__item = item
-        self.__name = name
-        self.__url = url
-        self.__address = address
+        self.__filename = filename
+        self.__addressSource = addressSource
+        self.__addressDestiny = addressDestiny
         self.__sheet = sheet
         self.__header = header
         self.__columns = columns
@@ -27,14 +27,14 @@ class SourceProduct:
     def get_item(self) -> str:
         return self.__item
 
-    def get_name(self) -> str:
-        return self.__name
+    def get_filename(self) -> str:
+        return self.__filename
 
-    def get_url(self) -> str:
-        return self.__url
+    def get_addressSource(self) -> str:
+        return self.__addressSource
 
-    def get_address(self) -> str:
-        return self.__address
+    def get_addressDestiny(self) -> str:
+        return self.__addressDestiny
 
     def get_sheet(self) -> str:
         return self.__sheet
@@ -73,14 +73,14 @@ class SourceProduct:
     def set_item(self, item: str):
         self.__item = item
 
-    def set_name(self, name: str):
-        self.__name = name
+    def set_filename(self, filename: str):
+        self.__filename = filename
 
-    def set_url(self, url: str):
-        self.__url = url
+    def set_addressSource(self, addressSource: str):
+        self.__addressSource = addressSource
 
-    def set_address(self, address: str):
-        self.__address = address
+    def set_addressDestiny(self, addressDestiny: str):
+        self.__addressDestiny = addressDestiny
 
     def set_sheet(self, sheet: str):
         self.__sheet = sheet
@@ -110,17 +110,18 @@ class SourceProduct:
         self.__SAPProduct = SAPProduct
 
 
-# Dicionário para armazenar os objetos SourceProduct
-dictionary_source_products = {}
+# Dicionário para armazenar os objetos DataItem
+dictionary_data_items = {}
 
 
-# Função para adicionar um novo SourceProduct ao dicionário
-def add_source_product(product_name, source_product):
-    dictionary_source_products[product_name] = source_product
+# Função para adicionar um novo DataItem ao dicionário
+def add_item_data(item_name, item_data):
+    dictionary_data_items[item_name] = item_data
 
-def remove_table(program):
+
+def remove_item_data(item_name):
     """Remove uma tabela do dicionário."""
-    if program in dictionary_source_products:
-        del dictionary_source_products[program]
+    if item_name in dictionary_data_items:
+        del dictionary_data_items[item_name]
     else:
-        print(f"Tabela '{program}' não encontrada no dicionário.")
+        print(f"Item '{item_name}' não encontrada no dicionário.")

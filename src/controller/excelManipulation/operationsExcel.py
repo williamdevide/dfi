@@ -8,8 +8,8 @@ from src.script.tools.tools import verifyFile
 
 
 def readFileExcel(identity, dataframeHolder, product, typeFile):
-    file = product.get_name()
-    address = product.get_address()
+    file = product.get_filename()
+    address = product.get_addressDestiny()
     sheet = product.get_sheet()
     header = product.get_header()
     columns = product.get_columns()

@@ -36,7 +36,7 @@ def importDatabaseToDataframe(identity, dataframeHolder, infoParameter, infoDb, 
 
     except Exception as e:
         strMsg = f'Erro ao importar informações do(s) database(s) de {typeConnect}:'
-        spLineBoxTaskErrors(strMsg, e)
+        spLineBoxTaskErrors(strMsg, str(e))
         return False
 
 

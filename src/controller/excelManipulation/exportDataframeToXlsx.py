@@ -17,7 +17,7 @@ def exportDataframeToXlsx(identity, dataframeHolder):
         spLineBoxTaskItemWithOutRecords(strMsg)
 
         # Grava DataFrame em um novo arquivo Excel
-        success = writeFileExcel(identity, infoDestiny.get_name(), infoDestiny.get_address(), infoDestiny.get_sheet(),
+        success = writeFileExcel(identity, infoDestiny.get_name(), infoDestiny.get_addressDestiny(), infoDestiny.get_sheet(),
                                  infoDestiny.get_header(), infoDestiny.get_columns(), dfFinal)
         verifySuccess(success)
 

@@ -21,9 +21,9 @@ def connectFile(identity, dataframeHolder, infoParameter, infoTables, infoProduc
 
                     fileName = ''
                     if typeConnect == 'Origem':
-                        fileName = item.get_url() + item.get_name()
+                        fileName = item.get_addressSource() + item.get_filename()
                     if typeConnect == 'Destino':
-                        fileName = item.get_address() + item.get_name()
+                        fileName = item.get_addressDestiny() + item.get_filename()
 
                     # Exibindo o número do índice e o número total de produtos
                     strMsg = 'Conectando..[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Arquivo:[' + fileName + ']:'
@@ -32,7 +32,7 @@ def connectFile(identity, dataframeHolder, infoParameter, infoTables, infoProduc
                     # Filtra pelos importMethods permitidos
                     if item.get_importMethod() == 'Download-xls' or item.get_importMethod() == 'Download-txt':
                         # Verifica se o arquivo existe e é acessível
-                        returnVerifyFile = verifyFile(item.get_name(), item.get_address())
+                        returnVerifyFile = verifyFile(item.get_filename(), item.get_addressDestiny())
                         if returnVerifyFile == 2:
                             spLineBoxTaskStatus('[ERRO]')
                             input()
@@ -45,5 +45,5 @@ def connectFile(identity, dataframeHolder, infoParameter, infoTables, infoProduc
 
     except Exception as e:
         strMsg = f'Conexão com {typeConnect}:'
-        spLineBoxTaskErrors(strMsg, e)
+        spLineBoxTaskErrors(strMsg, str(e))
         return False

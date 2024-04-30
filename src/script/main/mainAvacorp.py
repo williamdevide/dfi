@@ -3,7 +3,7 @@ import logging
 from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny, infoDatabaseSource
 from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
-from src.config.infoFileProducts import infoFileProduct, clearInformationProduct
+from src.config.infoFileProducts import infoDataItem, clearInformationProduct
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny
 from src.model.entities.entityDataframeHolder import DataFrameHolder
@@ -25,7 +25,7 @@ def mainAvacorp():
     infoParameter = infoParametersApplication(identity)
     dataframeHolder = DataFrameHolder()  # Cria o dicionário de DFs
     infoTables = infoDatabaseTableSourceAndDestiny(identity)
-    infoProduct = infoFileProduct(identity)
+    infoProduct = infoDataItem(identity)
 
     spLineBoxUp()
     spLineBoxTitle('ROTINA [0002-AVACORP] - Importação de dados do Avacorp')

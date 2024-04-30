@@ -1,11 +1,11 @@
-from src.model.entities.entityOperations import TableSourceAndDestiny, dictionary_tables, add_table, remove_table
+from src.model.entities.entityDataOperations import TableSourceAndDestiny, dictionary_tables, add_table, remove_table
 from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
 from src.script.tools.tools import getParameter
 
 
 def infoDatabaseTableSourceAndDestiny(identity):
     dfs = DataFrameHolderParameters()
-    nameDf = 'df' + identity + '_operations'
+    nameDf = 'df' + identity + '_data_operations'
     dfTables = dfs.get_df(nameDf)
 
     for index, row in dfTables.iterrows():
@@ -23,7 +23,7 @@ def removeDatabaseTableSourceAndDestiny(table):
 
 
 def addInformationTable(identity, program):
-    nameDf = 'df' + identity + '_operations'
+    nameDf = 'df' + identity + '_data_operations'
     tables = getParameter(nameDf, program)
 
     programName = tables[0]  # NOME DA ROTINA

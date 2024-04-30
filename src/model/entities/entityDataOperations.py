@@ -39,7 +39,7 @@ class TableSourceAndDestiny:
         self.destinyMerge = destinyMerge
 
 
-# Dicionário para armazenar os objetos SourceProduct
+# Dicionário para armazenar os objetos DataItem
 dictionary_tables = {}
 
 

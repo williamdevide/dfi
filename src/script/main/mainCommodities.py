@@ -4,7 +4,7 @@ from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny
 from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileDestiny, infoFileSource
-from src.config.infoFileProducts import infoFileProduct, clearInformationProduct
+from src.config.infoFileProducts import infoDataItem, clearInformationProduct
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.connections.connectFile import connectFile
 from src.controller.dataframeManipulation.createMainDataframe import createMainDataframe
@@ -23,14 +23,14 @@ def mainCommodities():
     # Registrando o início da execução no log
     logging.info("    => {} - Execução iniciada".format(identity))
 
-    infoDatabase.dbSource = None
-    infoDatabase.dbDestiny = None
+    # infoDatabase.dbSource = None
+    # infoDatabase.dbDestiny = None
 
     # Programa principal
     infoParameter = infoParametersApplication(identity)
     dataframeHolder = DataFrameHolder()  # Cria o dicionário de DFs
     infoTables = infoDatabaseTableSourceAndDestiny(identity)
-    infoProduct = infoFileProduct(identity)
+    infoProduct = infoDataItem(identity)
 
     spLineBoxUp()
     spLineBoxTitle('ROTINA [0001-COMMODITIES] - Importação de dados de Commodities para geração de Histórico')

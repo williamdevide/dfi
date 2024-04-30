@@ -1,5 +1,5 @@
 from src.config.infoDatabase import infoDatabaseSource, infoDatabaseDestiny
-from src.config.infoFileProducts import infoFileProduct
+from src.config.infoFileProducts import infoDataItem
 from src.controller.connections.connectDatabase import connectDatabase
 from src.controller.connections.connectFile import connectFile
 from src.controller.databaseManipulation.exportDataframeToDatabase import exportDataframeToDatabase
@@ -40,7 +40,7 @@ def selectProfileExportDestiny(identity, dataframeHolder, infoParameter, tables)
 def selectProfileImportSource(identity, dataframeHolder, infoParameter, infoTables):
     typeConnect = 'Origem'
     if infoParameter.tecnologyDatastoreSource == 'Txt' or infoParameter.tecnologyDatastoreSource == 'Excel':
-        infoProduct = infoFileProduct(identity)
+        infoProduct = infoDataItem(identity)
         verifySuccess(createMainDataframe(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect))
         spLineBoxMiddle()
         verifySuccess(connectFile(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect))
@@ -69,7 +69,7 @@ def selectProfileImportDestiny(identity, dataframeHolder, infoParameter, tables)
     typeConnect = 'Destino'
     # Verifica onde está o destino dos dados
     if infoParameter.tecnologyDatastoreDestiny == 'Excel':
-        infoProduct = infoFileProduct(identity)
+        infoProduct = infoDataItem(identity)
         # verifySuccess(connectFile(identity, dataframeHolder, infoParameter, infoFDestiny, tables, 'Destino'))
         spLineBoxMiddle()
         # verifySuccess(importXlsFinalToDataframe(identity, dataframeHolder, infoParameter, infoFDestiny, tables, 'Destino'))

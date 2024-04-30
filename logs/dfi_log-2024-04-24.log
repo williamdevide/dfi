@@ -4,11 +4,11 @@
 2024-04-24 08:35:07,395 - DFI => Execu��o iniciada
 2024-04-24 08:35:08,998 -     => Main - Execu��o iniciada
 2024-04-24 08:35:09,001 -     => commodities - Execu��o iniciada
-2024-04-24 08:35:17,932 -       => Error:       (X) importXlsToDataframe.py.[importXlsSeriesToDataframe]: Erro ao importar informa��es dos arquivos em s�rie:: 'SourceProduct' object has no attribute 'columns'
+2024-04-24 08:35:17,932 -       => Error:       (X) importXlsToDataframe.py.[importXlsSeriesToDataframe]: Erro ao importar informa��es dos arquivos em s�rie:: 'DataItem' object has no attribute 'columns'
 2024-04-24 08:37:17,673 - DFI => Execu��o iniciada
 2024-04-24 08:37:19,781 -     => Main - Execu��o iniciada
 2024-04-24 08:37:19,782 -     => commodities - Execu��o iniciada
-2024-04-24 08:37:29,822 -       => Error:       (X) importXlsToDataframe.py.[importXlsSeriesToDataframe]: Erro ao importar informa��es dos arquivos em s�rie:: 'SourceProduct' object has no attribute 'columns'
+2024-04-24 08:37:29,822 -       => Error:       (X) importXlsToDataframe.py.[importXlsSeriesToDataframe]: Erro ao importar informa��es dos arquivos em s�rie:: 'DataItem' object has no attribute 'columns'
 2024-04-24 08:39:16,914 - DFI => Execu��o iniciada
 2024-04-24 08:39:16,933 -     => Main - Execu��o iniciada
 2024-04-24 08:39:16,934 -     => commodities - Execu��o iniciada

@@ -36,7 +36,7 @@ def importXlsSeriesToDataframe(identity, dataframeHolder, infoParameter, tables,
                 if product.get_importar() == 'SIM':
 
                     # Exibindo o número do índice e o número total de produtos
-                    strMsg = 'Importing...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Arquivo:[' + product.get_name() + ']: '
+                    strMsg = 'Importing...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Arquivo:[' + product.get_filename() + ']: '
                     spLineBoxTaskItemWithRecords(strMsg)
 
                     if product.get_importMethod() == 'Download-xls':
