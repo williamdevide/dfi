@@ -1,4 +1,4 @@
-from src.config.infoFileProducts import infoDataItem
+from src.config.infoDataItems import infoDataItem
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.httpManipulation.executeDownloadFile import executeDownloadFile
 from src.script.tools.screenPrint import spLineBoxTaskItemWithOutRecords, spLineBoxTaskClose, spLineBoxTaskOpen, spLineBoxTaskErrors, spLineBoxTaskStatus

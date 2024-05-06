@@ -1,5 +1,5 @@
 from src.config.infoDatabase import infoDatabaseSource, infoDatabaseDestiny
-from src.config.infoFileProducts import infoDataItem
+from src.config.infoDataItems import infoDataItem
 from src.controller.connections.connectDatabase import connectDatabase
 from src.controller.connections.connectFile import connectFile
 from src.controller.databaseManipulation.exportDataframeToDatabase import exportDataframeToDatabase

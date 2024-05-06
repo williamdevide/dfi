@@ -2,7 +2,7 @@ import logging
 
 from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny
-from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
+from src.config.infoDataOperations import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileSource
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny, selectProfileExportHistory

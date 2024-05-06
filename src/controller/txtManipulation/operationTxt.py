@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pandas as pd
 
-from src.config.infoFileProducts import infoDataItem
+from src.config.infoDataItems import infoDataItem
 from src.script.tools.screenPrint import spLineBoxTaskErrors
 from src.script.tools.tools import getParameter, verifyFile, deleteLinesTxt
 

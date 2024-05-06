@@ -38,7 +38,7 @@ def addInformationDataItem(identity, item):
     return DataItem(importar, importMethod, item, filename, addressSource, addressDestiny, sheet, header, columns, conditionColumns, conditionValue, conversionFactor, unitSource, unitDestiny, SAPProduct)
 
 
-def clearInformationProduct(infoItems):
+def clearInformationDataItem(infoItems):
     indexItem = []
     for index, (program, table) in enumerate(infoItems.items(), start=1):
         indexItem.append(program)

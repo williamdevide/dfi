@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny
+from src.config.infoDataOperations import infoDatabaseTableSourceAndDestiny
 from src.controller.databaseManipulation.operationsDB import readTableSQL
 from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, spLineBoxTaskItemWithRecords, spLineBoxTaskRecords, spLineBoxTaskErrors
 from src.script.tools.tools import verifySuccess

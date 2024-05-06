@@ -2,9 +2,9 @@ import logging
 
 from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny
-from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
+from src.config.infoDataOperations import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
 from src.config.infoFile import infoFileDestiny, infoFileSource
-from src.config.infoFileProducts import infoDataItem, clearInformationProduct
+from src.config.infoDataItems import infoDataItem, clearInformationDataItem
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.connections.connectFile import connectFile
 from src.controller.dataframeManipulation.createMainDataframe import createMainDataframe
@@ -62,7 +62,7 @@ def mainCommodities():
     spLineBoxDown()
     spLineBlank()
 
-    clearInformationProduct(infoProduct)
+    clearInformationDataItem(infoProduct)
     clearDatabaseTableSourceAndDestiny(infoTables)
 
     # Registrando a conclusão da execução no log

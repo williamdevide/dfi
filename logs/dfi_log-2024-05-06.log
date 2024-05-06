@@ -1,0 +1,14 @@
+2024-05-06 07:34:06,076 - DFI => Execução iniciada
+2024-05-06 07:34:06,105 -     => Main - Execução iniciada
+2024-05-06 07:34:06,105 -     => commodities - Execução iniciada
+2024-05-06 07:34:42,107 -     => commodities - Execução concluída
+2024-05-06 07:34:42,121 -     => avacorp - Execução iniciada
+2024-05-06 07:34:44,347 -       => Error:       (X) connectDatabase.py.[connectDatabase]: Conexão com Origem: Server:Database:[168.75.71.21:dftransportes]:: 'DatabaseSourceInfo' object has no attribute 'get_addressDestiny'
+2024-05-06 07:35:00,904 - DFI => Execução iniciada
+2024-05-06 07:35:00,928 -     => Main - Execução iniciada
+2024-05-06 07:35:00,928 -     => commodities - Execução iniciada
+2024-05-06 07:35:37,064 -     => commodities - Execução concluída
+2024-05-06 07:35:37,078 -     => balancasp6000 - Execução iniciada
+2024-05-06 07:35:37,670 -       => Error:       (X) tools.py.[verifyFile]: O arquivo dfi_balancasp6000_log-2024-05-06.log não foi encontrado no caminho D:\Development\Python\dfi\arquivos-historico\balancasp6000.: 
+2024-05-06 07:35:37,706 -     => balancasp6000 - Execução concluída
+2024-05-06 07:35:37,706 -     => Main - Execução concluída

@@ -2,8 +2,8 @@ import logging
 
 from src.config import infoDatabase
 from src.config.infoDatabase import infoDatabaseDestiny, infoDatabaseSource
-from src.config.infoDatabaseTables import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
-from src.config.infoFileProducts import infoDataItem, clearInformationProduct
+from src.config.infoDataOperations import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
+from src.config.infoDataItems import infoDataItem, clearInformationDataItem
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny
 from src.model.entities.entityDataframeHolder import DataFrameHolder
@@ -51,7 +51,7 @@ def mainAvacorp():
     spLineBoxDown()
     spLineBlank()
 
-    clearInformationProduct(infoProduct)
+    clearInformationDataItem(infoProduct)
     clearDatabaseTableSourceAndDestiny(infoTables)
 
     # Registrando a conclusão da execução no log
