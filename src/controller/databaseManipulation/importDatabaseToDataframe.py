@@ -1,34 +1,34 @@
 import pandas as pd
 
-from src.config.infoDataOperations import infoDatabaseTableSourceAndDestiny
+from src.config.infoDataOperations import infoDataOperation
 from src.controller.databaseManipulation.operationsDB import readTableSQL
 from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, spLineBoxTaskItemWithRecords, spLineBoxTaskRecords, spLineBoxTaskErrors
 from src.script.tools.tools import verifySuccess
 
 
-def importDatabaseToDataframe(identity, dataframeHolder, infoParameter, infoDb, tables, typeConnect):
+def importDatabaseToDataframe(identity, dataframeHolder, infoParameters, infoDb, infoOperations, typeConnect):
     try:
         strMsg = f'Importando dados do {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}] para Dataframe principal:'
         spLineBoxTaskOpen(strMsg)
-        infoTables = infoDatabaseTableSourceAndDestiny(identity)
+        infoTables = infoDataOperation(identity)
 
         # Iterate over the list and call downloadFile function for each item
-        for index, (program, table) in enumerate(tables.items(), start=1):
-            totalFiles = len(tables)
+        for index, (operation_name, operation) in enumerate(infoOperations.items(), start=1):
+            totalFiles = len(infoOperations)
 
             # Exibindo o número do índice e o número total de registros
             tableName = ''
             if typeConnect == 'Origem':
-                tableName = table.get_source()
+                tableName = operation.get_source()
             if typeConnect == 'Destino':
-                tableName = table.get_destiny()
+                tableName = operation.get_destiny()
 
             strMsg = 'Importando...[' + str(index).zfill(2) + '/' + str(totalFiles).zfill(2) + ']: Tabela:[' + tableName + ']: '
 
             spLineBoxTaskItemWithRecords(strMsg)
 
             # Realiza a chamada para importação do database para o dataframe
-            verifySuccess(executeImportDatabaseToDataframe(identity, dataframeHolder, infoParameter, infoDb, table, typeConnect))
+            verifySuccess(executeImportDatabaseToDataframe(identity, dataframeHolder, infoParameters, infoDb, operation, typeConnect))
 
         strMsg = f'Importando dados do {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}] para Dataframe principal:'
         spLineBoxTaskClose(strMsg)
@@ -48,34 +48,27 @@ def executeImportDatabaseToDataframe(identity, dataframeHolder, infoParameter, i
         if not success:
             return False
 
-        # verifica se existe conteudo. se existir conteudo ordena e mescla com o dfMain criando o df[productName]]
-        if not dfTemp.empty:
-
-            if typeConnect == 'Origem':
-                # condições para dftemp de origem com conteudo
-                x = 1
-
-            if typeConnect == 'Destino':
-                # condições para dftemp de destino com conteudo
-                x = 1
-
-        else:
-            if typeConnect == 'Origem':
-                # condições para dftemp de origem sem conteudo
-                x = 1
-
-            if typeConnect == 'Destino':
-                # condições para dftemp de destino sem conteudo
-                # dfTemp = pd.DataFrame()
-                dfTemp = pd.DataFrame(columns=infoParameter.structureFieldsDataframeSource)
-
         totalRecords = '[' + str(dfTemp.shape[0]).rjust(6) + ' records]'
         spLineBoxTaskRecords(totalRecords)
 
-        if dataframeHolder.get_df('df' + table.get_programName() + '_Destiny') is None:
-            dataframeHolder.add_df('df' + table.get_programName() + '_Destiny', dfTemp)
-        else:
-            dataframeHolder.set_df('df' + table.get_programName() + '_Destiny', dfTemp)
+        # REALIZAR A IMPORTAÇÃO PARA O DATAFRAME _DESTINY SE FOR O IMPORT DESTINY, CASO CONTRARIO REALIZAR A IMPORTAÇÃO PARA O PROGRAMNAME
+        if typeConnect == 'Origem':
+            # VERIFICA SE EXISTE O DF
+            if dataframeHolder.get_df('df' + table.get_programName()) is None:
+                # SE NÃO EXISTIR CRIA A PARTIR DO DFTEMP
+                dataframeHolder.add_df('df' + table.get_programName() + '_Source', dfTemp)
+            else:
+                # SE EXISTIR PREENCHE ELE COM OS DADOS DO DFTEMP
+                dataframeHolder.set_df('df' + table.get_programName() + '_Source', dfTemp)
+
+        if typeConnect == 'Destino':
+            # VERIFICA SE EXISTE O DF _DESTINY
+            if dataframeHolder.get_df('df' + table.get_programName() + '_Destiny') is None:
+                # SE NÃO EXISTIR CRIA A PARTIR DO DFTEMP
+                dataframeHolder.add_df('df' + table.get_programName() + '_Destiny', dfTemp)
+            else:
+                # SE EXISTIR PREENCHE ELE COM OS DADOS DO DFTEMP
+                dataframeHolder.set_df('df' + table.get_programName() + '_Destiny', dfTemp)
 
         return True
 

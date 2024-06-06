@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import pandas as pd
 
@@ -8,7 +8,7 @@ from src.script.tools.screenPrint import spLineBoxTaskErrors
 from src.script.tools.tools import verifyExtensionSQL, verifyFile, getParameter
 
 
-def readTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeConnect):
+def readTableSQL(identity, dataframeHolder, infoParameter, infoDb, operation, typeConnect):
     # Instanciando o controlador de dados
     data_controller = DataController(identity, infoDb)
 
@@ -25,15 +25,15 @@ def readTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeCo
 
     file = ''
     if typeConnect == 'Origem':
-        file = table.get_source()
+        file = operation.get_source()
     if typeConnect == 'Destino':
-        file = table.get_destiny()
+        file = operation.get_destiny()
 
     # Verifica se será usado tabela ou consulta sql
     if verifyExtensionSQL(file):
         # Verifica qual será o arquivo .sql, se ele existe e retorna o conteudo do arquivo já tratado as váriaveis
         file_sql = file
-        sqlStatement = openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConnect, table, file_sql)
+        sqlStatement = openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConnect, operation, file_sql)
 
         data = data_controller.execute_query(sqlStatement)
         dfRead = pd.DataFrame(data)
@@ -50,7 +50,7 @@ def readTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeCo
     return True, df_res
 
 
-def writeTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeConnect):
+def writeTableSQL(identity, dataframeHolder, infoParameter, infoDb, operation, typeConnect):
     # Instanciando o controlador de dados
     data_controller = DataController(identity, infoDb)
 
@@ -63,25 +63,25 @@ def writeTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeC
         spLineBoxTaskErrors(strMsg)
         input()
 
-    dataframe = dataframeHolder.get_df('df' + table.get_programName())
+    dataframe = dataframeHolder.get_df('df' + operation.get_programName())
     if isinstance(dataframe, pd.DataFrame):
         if dataframe.empty:
-            dataframe = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
+            dataframe = dataframeHolder.get_df('df' + operation.get_programName() + '_Destiny')
     else:
-        dataframe = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
+        dataframe = dataframeHolder.get_df('df' + operation.get_programName() + '_Destiny')
 
     # Gravando dataframe na tabela de destino
-    if table.get_destinyTemp() != '':
-        destinyTemp = table.get_destinyTemp()
+    if operation.get_destinyTemp() != '':
+        destinyTemp = operation.get_destinyTemp()
         data_controller.write_data_to_table(dataframe, destinyTemp)
 
         # Verifica qual será o arquivo .sql de merge
-        file_sql = table.get_destinyMerge()
-        sqlStatement = openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConnect, table, file_sql)
+        file_sql = operation.get_destinyMerge()
+        sqlStatement = openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConnect, operation, file_sql)
         data_controller.execute_sql(sqlStatement)
         data_controller.delete_table(destinyTemp)
     else:
-        destiny = table.get_destiny()
+        destiny = operation.get_destiny()
         data_controller.write_data_to_table(dataframe, destiny)
 
     # Fecha a conexão com o banco de dados
@@ -90,7 +90,7 @@ def writeTableSQL(identity, dataframeHolder, infoParameter, infoDb, table, typeC
     return True, dataframe
 
 
-def openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConnect, table, file_sql):
+def openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConnect, operation, file_sql):
     sqlStatement = ''
     installationPath = getParameter('dfglobal_parameters_application', 'installationPath')
     root_dir = os.path.join(installationPath, 'src\\database\\sql')
@@ -106,12 +106,16 @@ def openSqlStatement(identity, dataframeHolder, infoParameter, infoDb, typeConne
         with open(sql_file_path, 'r', encoding='utf-8') as file:
             sqlStatement = file.read()
 
-            # Substitui as variáveis pelos valores fornecidos
+            # definição da data inicial para consulta
             sqlStatement = sqlStatement.replace('{initialDate}', infoParameter.dateFieldValueDefault)
-            sqlStatement = sqlStatement.replace('{finalDate}', datetime.now().strftime('%Y-%m-%d'))
 
-            if table.get_destinyTemp():
-                sqlStatement = sqlStatement.replace('{var_table_name}', table.get_destiny())
-                sqlStatement = sqlStatement.replace('{var_temp_table_name}', table.get_destinyTemp())
+            # definição da data final para consulta
+            daysFuture = operation.get_daysFuture()
+            finalDate = datetime.now() + timedelta(days=daysFuture)
+            sqlStatement = sqlStatement.replace('{finalDate}', finalDate.strftime('%Y-%m-%d'))
+
+            if operation.get_destinyTemp():
+                sqlStatement = sqlStatement.replace('{var_table_name}', operation.get_destiny())
+                sqlStatement = sqlStatement.replace('{var_temp_table_name}', operation.get_destinyTemp())
 
     return sqlStatement

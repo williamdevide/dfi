@@ -7,10 +7,10 @@ from src.script.tools.screenPrint import spLineBoxTaskErrors
 from src.script.tools.tools import getCurrentDate, getWeekdayName, convertAndOrderByData, mergeDataframesOuter
 
 
-def prepareAmbient(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect):
+def prepareAmbient(identity, dataframeHolder, infoParameter, infoOperations, infoItems, typeConnect):
     try:
         if identity == 'commodities':
-            nameTable, table = next(iter(infoTables.items()))
+            nameTable, table = next(iter(infoOperations.items()))
             if dataframeHolder.count_regs_df(
                     'df' + table.get_programName() + '_Destiny') == 0:
                 # Convert strings into date objects
@@ -47,5 +47,5 @@ def prepareAmbient(identity, dataframeHolder, infoParameter, infoTables, infoPro
         return True
 
     except Exception as e:
-        spLineBoxTaskErrors('Erro ao preparar ambiente:', e)
+        spLineBoxTaskErrors('Erro ao preparar ambiente:', str(e))
         return False

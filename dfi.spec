@@ -10,7 +10,7 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['parameters', 'parameters_build', 'parameters_dev', 'src/database/sql/avacorpConsultaAbastecimentosModelo2', 'src/database/sql/avacorpConsultaDocumentosEmitidos', 'src/database/sql/avacorpFiscalFinanceiroContabil', 'src/database/sql/avacorpFluxoCaixaFuturoModelo2', 'src/database/sql/avacorpFluxoCaixaRealizadoModelo2', 'src/database/sql/avacorpHistoricoGastosComManutencao', 'src/database/sql/avacorpNotificacaoMultaDeTransito', 'src/database/sql/avacorpPedidoColeta', 'src/database/sql/commoditiesMerge'],
+    excludes=['parameters', 'src/database/sql/avacorpConsultaAbastecimentosModelo2', 'src/database/sql/avacorpConsultaDocumentosEmitidos', 'src/database/sql/avacorpFiscalFinanceiroContabil', 'src/database/sql/avacorpFluxoCaixaFuturoModelo2', 'src/database/sql/avacorpFluxoCaixaRealizadoModelo2', 'src/database/sql/avacorpHistoricoGastosComManutencao', 'src/database/sql/avacorpNotificacaoMultaDeTransito', 'src/database/sql/avacorpPedidoColeta', 'src/database/sql/avacorpVeiculo', 'src/database/sql/commoditiesMerge'],
     noarchive=False,
 )
 pyz = PYZ(a.pure)

@@ -1,7 +1,7 @@
 from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskItemWithOutRecords
 
 
-def unionDataframes(identity, dataframeHolder, infoParameter, tables, products):
+def unionDataframes(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect):
     try:
         strMsg = f'Operação: União dos Dataframes:'
         spLineBoxTaskItemWithOutRecords(strMsg)

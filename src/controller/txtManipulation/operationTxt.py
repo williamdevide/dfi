@@ -8,7 +8,7 @@ from src.script.tools.screenPrint import spLineBoxTaskErrors
 from src.script.tools.tools import getParameter, verifyFile, deleteLinesTxt
 
 
-def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
+def readFileTxt(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect):
 
     # Monta o caminho completo do arquivo
     absolutePath = item.get_addressDestiny() + item.get_filename()
@@ -16,7 +16,7 @@ def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, type
     if typeConnect == 'Origem':
 
         # criando df com estrutura do infoParameters
-        dfRead = pd.DataFrame(columns=infoParameter.structureFieldsDataframeSource)
+        dfRead = pd.DataFrame(columns=infoParameters.structureFieldsDataframeSource)
 
         # Lê o arquivo e a armazena em um DataFrame
         if os.path.exists(absolutePath) and os.path.getsize(absolutePath) > 0:
@@ -25,7 +25,7 @@ def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, type
             df = pd.DataFrame(dfRead)
 
         # Montando df com a mesma estrutura do infoParameters
-        dfRead = structureTxtDataframe(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect, dfRead, df)
+        dfRead = structureTxtDataframe(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect, dfRead, df)
 
     else:  # Destino
         # TRECHO PARA LEITURA DE TXT DE DESTINO
@@ -36,7 +36,7 @@ def readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, type
     return True, df_res
 
 
-def writeFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
+def writeFileTxt(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect):
 
     address = ''
     file = ''
@@ -60,7 +60,7 @@ def writeFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typ
         address = os.path.join(installationPath, 'arquivos-historico', identity)
         file = datetime.now().strftime(f'dfi_{identity}_log-%Y-%m-%d.log')
 
-        clearTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect)
+        clearTxt(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect)
 
     destinyDf = dataframe
 

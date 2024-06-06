@@ -1,5 +1,3 @@
-import pandas as pd
-
 from src.controller.dataframeManipulation.prepareAmbient import prepareAmbient
 from src.controller.dataframeManipulation.unionDataframes import unionDataframes
 from src.controller.dataframeManipulation.updateDataframe import updateDataframe
@@ -9,17 +7,17 @@ from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskOpen,
 from src.script.tools.tools import verifySuccess
 
 
-def importTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect):
+def importTxtToDataframe(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect):
     try:
         strMsg = f'Importando informações do(s) arquivo(s) de {typeConnect} para Dataframe principal.'
         spLineBoxTaskOpen(strMsg)
 
         # Gerando dataframe inicial com todas as datas e dia da semana. Será usado para merge com cada um dos importSeriesProduct
         spLineBoxTaskItemWithOutRecords('Preparando Ambiente:')
-        verifySuccess(prepareAmbient(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect))
+        verifySuccess(prepareAmbient(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect))
 
-        totalFiles = len(infoProduct)
-        totalFilesYes = sum(1 for df in infoProduct.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
+        totalFiles = len(infoItems)
+        totalFilesYes = sum(1 for df in infoItems.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
 
         if totalFilesYes < totalFiles:
             strMsg = f'Informação: Encontrados parâmetros para {totalFiles} arquivo(s) de origem. {totalFilesYes} arquivo(s) a ser importados.'
@@ -27,7 +25,7 @@ def importTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, i
             spLineBoxTaskStatus('')
 
         if totalFilesYes > 0:
-            for index, (item_name, item) in enumerate(infoProduct.items(), start=1):
+            for index, (item_name, item) in enumerate(infoItems.items(), start=1):
                 if item.get_importar() == 'SIM':
 
                     fileName = ''
@@ -42,13 +40,13 @@ def importTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, i
 
                     if item.get_importMethod() == 'Download-txt':
                         # Realiza a chamada para importação do xls para o dataframe
-                        verifySuccess(executeImportTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect))
+                        verifySuccess(executeImportTxtToDataframe(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect))
 
             # Gerando dataframe final com a união dos dataframes de produtos
-            verifySuccess(unionDataframes(identity, dataframeHolder, infoParameter, infoTables, infoProduct))
+            verifySuccess(unionDataframes(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect))
 
             # Atualizando dfChargeDestiny com os valores do dfUnion
-            verifySuccess(updateDataframe(identity, dataframeHolder, infoParameter, infoTables, infoProduct))
+            verifySuccess(updateDataframe(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect))
 
         strMsg = f'Importando informações do(s) arquivo(s) de {typeConnect} para Dataframe principal.'
         spLineBoxTaskClose(strMsg)
@@ -59,10 +57,11 @@ def importTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, i
         spLineBoxTaskErrors(strMsg, str(e))
         return False
 
-def executeImportTxtToDataframe(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect):
+
+def executeImportTxtToDataframe(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect):
     try:
         # Realiza a leitura do excel de origem caso existente
-        success, dfTemp = readFileTxt(identity, dataframeHolder, infoParameter, infoTables, item, typeConnect)
+        success, dfTemp = readFileTxt(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect)
 
         if not success:
             return False

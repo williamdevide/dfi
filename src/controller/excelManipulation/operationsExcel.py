@@ -7,24 +7,24 @@ from src.config.infoParametersApplication import infoParametersApplication
 from src.script.tools.tools import verifyFile
 
 
-def readFileExcel(identity, dataframeHolder, product, typeFile):
-    file = product.get_filename()
-    address = product.get_addressDestiny()
-    sheet = product.get_sheet()
-    header = product.get_header()
-    columns = product.get_columns()
-    productItem = product.get_item()
-    condictionColumn = product.get_conditionColumns()
-    condictionValue = product.get_conditionValue()
-    conversionFactor = product.get_conversionFactor()
-    unitSource = product.get_unitSource()
-    unitDestiny = product.get_unitDestiny()
-    SAPProduct = product.get_SAPProduct()
+def readFileExcel(identity, dataframeHolder, infoParameters, infoOperations, item, typeConnect):
+    file = item.get_filename()
+    address = item.get_addressDestiny()
+    sheet = item.get_sheet()
+    header = item.get_header()
+    columns = item.get_columns()
+    productItem = item.get_item()
+    condictionColumn = item.get_conditionColumns()
+    condictionValue = item.get_conditionValue()
+    conversionFactor = item.get_conversionFactor()
+    unitSource = item.get_unitSource()
+    unitDestiny = item.get_unitDestiny()
+    SAPProduct = item.get_SAPProduct()
 
     # Monta o caminho completo do arquivo
     absolutePath = address + file
 
-    if typeFile == 'Origem':
+    if typeConnect == 'Origem':
         info = infoParametersApplication(identity)
 
         # criando df com estrutura do infoParameters

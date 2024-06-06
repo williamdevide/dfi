@@ -3,20 +3,20 @@ from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, 
 from src.script.tools.tools import verifyFile
 
 
-def connectFile(identity, dataframeHolder, infoParameter, infoTables, infoProduct, typeConnect):
+def connectFile(identity, dataframeHolder, infoParameter, infoOperations, infoItems, typeConnect):
     try:
         strMsg = f'Conexão com {typeConnect}:'
         spLineBoxTaskOpen(strMsg)
 
-        totalFiles = len(infoProduct)
-        totalFilesYes = sum(1 for df in infoProduct.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
+        totalFiles = len(infoItems)
+        totalFilesYes = sum(1 for df in infoItems.values() if 'get_importar' in dir(df) and df.get_importar() == 'SIM')
         if totalFilesYes < totalFiles:
             strMsg = f'Informação: Encontrados parâmetros para {totalFiles} arquivo(s) de origem. {totalFilesYes} arquivo(s) a ser importados.'
             spLineBoxTaskItemWithOutRecords(strMsg)
             spLineBoxTaskStatus('')
 
         if totalFilesYes > 0:
-            for index, (item_name, item) in enumerate(infoProduct.items(), start=1):
+            for index, (item_name, item) in enumerate(infoItems.items(), start=1):
                 if item.get_importar() == 'SIM':
 
                     fileName = ''

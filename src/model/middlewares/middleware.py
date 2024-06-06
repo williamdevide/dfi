@@ -40,7 +40,7 @@ class DatabaseManager:
         return create_engine('mssql+pyodbc:///?odbc_connect={}'.format(quoted)).connect()
 
     def _connect_to_postgresql(self):
-        host = self.database_info.get_addressDestiny()
+        host = self.database_info.get_address()
         database = self.database_info.get_databaseName()
         user = self.database_info.get_username()
         password = self.database_info.get_password()

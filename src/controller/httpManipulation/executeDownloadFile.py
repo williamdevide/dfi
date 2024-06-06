@@ -4,7 +4,7 @@ from src.controller.excelManipulation.operationsExcel import openAndSaveExcelFil
 from src.script.tools.screenPrint import spLineBoxTaskStatus
 
 
-def executeDownloadFile(identity, product, url, fileName, saveLocation, headersBrowser):
+def executeDownloadFile(identity, item, url, fileName, saveLocation, headersBrowser):
     try:
         # Make a GET request to fetch the file content
         response = requests.get(url, headers=headersBrowser)

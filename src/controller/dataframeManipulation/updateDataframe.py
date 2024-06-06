@@ -4,10 +4,9 @@ import pandas as pd
 
 from src.config.infoParametersApplication import infoParametersApplication
 from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskItemWithOutRecords
-from src.script.tools.tools import mergeDataframesInner, mergeDataframesOuter
 
 
-def updateDataframe(identity, dataframeHolder, infoParameter, tables, products):
+def updateDataframe(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect):
     try:
         strMsg = f'Operação: Update dos Dataframes:'
         spLineBoxTaskItemWithOutRecords(strMsg)
@@ -16,7 +15,7 @@ def updateDataframe(identity, dataframeHolder, infoParameter, tables, products):
             warnings.filterwarnings("ignore", category=FutureWarning)
 
             info = infoParametersApplication(identity)
-            nameTable, table = next(iter(tables.items()))
+            nameTable, table = next(iter(infoOperations.items()))
 
             df1 = dataframeHolder.get_df('df' + table.get_programName() + '_Destiny')
             df2 = dataframeHolder.get_df('dfUnion')
@@ -45,7 +44,6 @@ def updateDataframe(identity, dataframeHolder, infoParameter, tables, products):
                     df1.loc[mask, update_columns] = row[update_columns].values
 
                 # Dataframe principal recebe os dados do dataframe local
-
                 nameDf = table.get_programName()
                 dataframeHolder.add_df(nameDf, df1)
             else:
@@ -60,11 +58,15 @@ def updateDataframe(identity, dataframeHolder, infoParameter, tables, products):
                         df2[coluna] = df2[coluna].astype(df1[coluna].dtype)
 
                 if identity == 'commodities':
-                    # df1 = df1.sort_values(by=['comhis_commodity', 'comhis_date']).reset_index(drop=True)  # Ordenar por 'Data' e redefinir índices
-                    # df2 = df2.sort_values(by=['comhis_commodity', 'comhis_date']).reset_index(drop=True)  # Ordenar por 'Data' e redefinir índices
-                    # dfTemp = df2.set_index(['comhis_date', 'comhis_day_week', 'comhis_commodity']).combine_first(df1.set_index(['comhis_date', 'comhis_day_week', 'comhis_commodity'])).reset_index()
                     dfTemp = df2.set_index(['comhis_date', 'comhis_day_week', 'comhis_commodity']).combine_first(df1.set_index(['comhis_date', 'comhis_day_week', 'comhis_commodity'])).reset_index()
-                    # dfTemp = dfTemp.sort_values(by=['comhis_commodity', 'comhis_date']).reset_index(drop=True)  # Ordenar por 'Data' e redefinir índices
+                    dataframeHolder.add_df(nameDf, dfTemp)
+                elif identity == 'balancasp6000':
+                    dfTemp = df2.set_index(df2.columns[8]).combine_first(df1.set_index(df2.columns[8])).reset_index()
+                    dfTemp = dfTemp.sort_values(by=dfTemp.columns[0])
+                    cols = dfTemp.columns.tolist()
+                    cols = cols[1:8] + [cols[0]] + cols[8:]
+                    dfTemp = dfTemp[cols]
+
                     dataframeHolder.add_df(nameDf, dfTemp)
                 else:
                     dfTemp = df2.set_index(df2.columns[0]).combine_first(df1.set_index(df2.columns[0])).reset_index()

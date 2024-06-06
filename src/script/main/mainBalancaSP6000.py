@@ -1,13 +1,11 @@
 import logging
 
-from src.config import infoDatabase
-from src.config.infoDatabase import infoDatabaseDestiny
-from src.config.infoDataOperations import infoDatabaseTableSourceAndDestiny, clearDatabaseTableSourceAndDestiny
-from src.config.infoFile import infoFileSource
+from src.config.infoDataItems import infoDataItem, clearInformationDataItem
+from src.config.infoDataOperations import infoDataOperation, clearInformationDataOperation
 from src.config.infoParametersApplication import infoParametersApplication
 from src.controller.selectProfile import selectProfileImportDestiny, selectProfileImportSource, selectProfileExportDestiny, selectProfileExportHistory
 from src.model.entities.entityDataframeHolder import DataFrameHolder
-from src.script.tools.screenPrint import spLineBoxError, spLineBoxUp, spLineBoxTitle, spLineBoxText, spLineBoxMiddle, spLineBoxBlank, spHeader, spLineBoxDown, spLineBlank
+from src.script.tools.screenPrint import spLineBoxUp, spLineBoxTitle, spLineBoxText, spLineBoxMiddle, spHeader, spLineBoxDown, spLineBlank
 from src.script.tools.tools import getParameter
 
 
@@ -17,33 +15,35 @@ def mainBalancaSP6000():
     # Registrando o início da execução no log
     logging.info("    => {} - Execução iniciada".format(identity))
 
-    infoDatabase.dbSource = None
-    infoDatabase.dbDestiny = None
+    # infoDatabase.dbSource = None
+    # infoDatabase.dbDestiny = None
 
     # Programa principal
-    infoParameter = infoParametersApplication(identity)
     dataframeHolder = DataFrameHolder()  # Cria o dicionário de DFs
-    infoTables = infoDatabaseTableSourceAndDestiny(identity)
+
+    infoParameters = infoParametersApplication(identity)
+    infoOperations = infoDataOperation(identity)
+    infoItems = infoDataItem(identity)
 
     spLineBoxUp()
     spLineBoxTitle('ROTINA [0003-BALANCASP6000] - Importação de dados de pesagem de veículos de carga na Balança SP-6000 para geração de Histórico')
     spLineBoxMiddle()
-    spLineBoxText('Data de ínicio de busca:', infoParameter.dateFieldValue)
-    spLineBoxText('Source Datastore.......:', infoParameter.tecnologyDatastoreSource)
-    spLineBoxText('Destiny Datastore......:', infoParameter.tecnologyDatastoreDestiny)
+    spLineBoxText('Data de ínicio de busca:', infoParameters.dateFieldValue)
+    spLineBoxText('Source Datastore.......:', infoParameters.tecnologyDatastoreSource)
+    spLineBoxText('Destiny Datastore......:', infoParameters.tecnologyDatastoreDestiny)
     spLineBoxMiddle()
     spHeader()
     spLineBoxMiddle()
 
-    selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)
+    selectProfileImportDestiny(identity, dataframeHolder, infoParameters, infoOperations)
     spLineBoxMiddle()
-    selectProfileImportSource(identity, dataframeHolder, infoParameter, infoTables)
+    selectProfileImportSource(identity, dataframeHolder, infoParameters, infoOperations)
     spLineBoxMiddle()
-    selectProfileExportDestiny(identity, dataframeHolder, infoParameter, infoTables)
+    selectProfileExportDestiny(identity, dataframeHolder, infoParameters, infoOperations)
     spLineBoxMiddle()
-    selectProfileExportHistory(identity, dataframeHolder, infoParameter, infoTables)
+    selectProfileExportHistory(identity, dataframeHolder, infoParameters, infoOperations)
     spLineBoxMiddle()
-    selectProfileImportDestiny(identity, dataframeHolder, infoParameter, infoTables)
+    selectProfileImportDestiny(identity, dataframeHolder, infoParameters, infoOperations)
     spLineBoxDown()
 
     spLineBoxUp()
@@ -51,8 +51,8 @@ def mainBalancaSP6000():
     spLineBoxDown()
     spLineBlank()
 
-
-    clearDatabaseTableSourceAndDestiny(infoTables)
+    clearInformationDataItem(infoItems)
+    clearInformationDataOperation(infoOperations)
 
     # Registrando a conclusão da execução no log
     logging.info("    => {} - Execução concluída".format(identity))

@@ -5,7 +5,7 @@ from src.script.tools.screenPrint import spLineBoxTaskOpen, spLineBoxTaskClose, 
 from src.script.tools.tools import verifySuccess
 
 
-def exportDataframeToXlsx(identity, dataframeHolder):
+def exportDataframeToXlsx(identity, dataframeHolder, infoParameters, infoOperations, infoItems, typeConnect):
     try:
         spLineBoxTaskOpen('Exportando dataframe final para destino:')
         infoDestiny = infoFileDestiny(identity)
@@ -25,5 +25,5 @@ def exportDataframeToXlsx(identity, dataframeHolder):
         return True
 
     except Exception as e:
-        spLineBoxTaskErrors('Erro ao exportar arquivo de destino:', e)
+        spLineBoxTaskErrors('Erro ao exportar arquivo de destino:', str(e))
         return False

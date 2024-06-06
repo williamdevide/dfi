@@ -4,7 +4,7 @@ from src.script.tools.screenPrint import spLineBoxTaskErrors, spLineBoxTaskClose
 from src.script.tools.tools import verifyExtensionSQL, verifySuccess
 
 
-def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, typeConnect):
+def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, infoOperations, typeConnect):
     try:
         strMsg = f'Conexão com {typeConnect}: Server:Database:[{infoDb.get_address()}:{infoDb.get_databaseName()}]:'
         spLineBoxTaskOpen(strMsg)
@@ -21,8 +21,8 @@ def connectDatabase(identity, dataframeHolder, infoParameter, infoDb, tables, ty
             input()
 
         # Iterate over the list and call downloadFile function for each item
-        for index, (program, table) in enumerate(tables.items(), start=1):
-            totalFiles = len(tables)
+        for index, (program, table) in enumerate(infoOperations.items(), start=1):
+            totalFiles = len(infoOperations)
 
             # Exibindo o número do índice e o número total de registros
             tableName = ''

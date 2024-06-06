@@ -1,10 +1,11 @@
 class TableSourceAndDestiny:
-    def __init__(self, programName: str, source: str, destiny: str, destinyTemp: str, destinyMerge: str):
+    def __init__(self, programName: str, source: str, destiny: str, destinyTemp: str, destinyMerge: str, daysFuture: int):
         self.programName = programName
         self.source = source
         self.destiny = destiny
         self.destinyTemp = destinyTemp
         self.destinyMerge = destinyMerge
+        self.daysFuture = daysFuture
 
     # Getters
     def get_programName(self) -> str:
@@ -22,6 +23,9 @@ class TableSourceAndDestiny:
     def get_destinyMerge(self) -> str:
         return self.destinyMerge
 
+    def get_daysFuture(self) -> int:
+        return self.daysFuture
+
     # Setters
     def set_programName(self, programName: str):
         self.programName = programName
@@ -38,6 +42,8 @@ class TableSourceAndDestiny:
     def set_destinyMerge(self, destinyMerge: str):
         self.destinyMerge = destinyMerge
 
+    def set_daysFuture(self, daysFuture: int):
+        self.daysFuture = daysFuture
 
 # Dicionário para armazenar os objetos DataItem
 dictionary_tables = {}

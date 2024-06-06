@@ -1,0 +1,13 @@
+2024-06-03 17:30:01,926 - DFI => Execução iniciada
+2024-06-03 17:30:01,953 -     => Main - Execução iniciada
+2024-06-03 17:30:01,954 -     => balancasp6000 - Execução iniciada
+2024-06-03 17:37:08,225 - DFI => Execução iniciada
+2024-06-03 17:37:08,250 -     => Main - Execução iniciada
+2024-06-03 17:37:08,251 -     => balancasp6000 - Execução iniciada
+2024-06-03 17:38:19,540 - DFI => Execução iniciada
+2024-06-03 17:38:19,564 -     => Main - Execução iniciada
+2024-06-03 17:38:19,565 -     => balancasp6000 - Execução iniciada
+2024-06-03 17:39:31,631 - DFI => Execução iniciada
+2024-06-03 17:39:31,654 -     => Main - Execução iniciada
+2024-06-03 17:39:31,655 -     => balancasp6000 - Execução iniciada
+2024-06-03 17:39:47,688 -       => Error:       (X) importDatabaseToDataframe.py.[executeImportDatabaseToDataframe]: Erro durante a importação de dados:: 'PyLineCallback' object has no attribute 'py_db'

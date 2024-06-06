@@ -3,26 +3,26 @@ from src.model.entities.entityDataframeHolderParameters import DataFrameHolderPa
 from src.script.tools.tools import getParameter
 
 
-def infoDatabaseTableSourceAndDestiny(identity):
+def infoDataOperation(identity):
     dfs = DataFrameHolderParameters()
     nameDf = 'df' + identity + '_data_operations'
     dfTables = dfs.get_df(nameDf)
 
     for index, row in dfTables.iterrows():
         # Adicionar o produto ao dicionário
-        add_table(index, addInformationTable(identity, index))
+        add_table(index, addInformationDataOperation(identity, index))
 
     return dictionary_tables
 
 
-def removeDatabaseTableSourceAndDestiny(table):
+def removeDataOperation(table):
     # Adicionar o produto ao dicionário
     remove_table(table)
 
     return dictionary_tables
 
 
-def addInformationTable(identity, program):
+def addInformationDataOperation(identity, program):
     nameDf = 'df' + identity + '_data_operations'
     tables = getParameter(nameDf, program)
 
@@ -31,11 +31,12 @@ def addInformationTable(identity, program):
     destiny = tables[2]  # NOME DA TABELA DE DESTINO
     destinyTemp = tables[3]  # NOME DA TABELA TEMPORÁRIA DE DESTINO
     destinyMerge = tables[4]  # NOME DA ROTINA SQL PARA MERGE DE DESTINO ENTRE TEMPORÁRIA E FINAL
+    daysFuture = int(tables[5]) # NÚMERO DE DIAS A FRENTE DE HOJE PARA DATA FINAL (PADRÃO 0: RETORNA CONSULTAS ATÉ HOJE)
 
-    return TableSourceAndDestiny(programName, source, destiny, destinyTemp, destinyMerge)
+    return TableSourceAndDestiny(programName, source, destiny, destinyTemp, destinyMerge, daysFuture)
 
 
-def clearDatabaseTableSourceAndDestiny(infoTables):
+def clearInformationDataOperation(infoTables):
     indexTable = []
     for index, (program, table) in enumerate(infoTables.items(), start=1):
         indexTable.append(program)

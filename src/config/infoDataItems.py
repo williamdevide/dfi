@@ -1,5 +1,5 @@
-from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
 from src.model.entities.entityDataItem import DataItem, add_item_data, dictionary_data_items, remove_item_data
+from src.model.entities.entityDataframeHolderParameters import DataFrameHolderParameters
 from src.script.tools.tools import getParameter
 
 
